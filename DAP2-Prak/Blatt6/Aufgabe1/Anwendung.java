@@ -9,28 +9,34 @@ public class Anwendung
 {
     public static void main(String[] args)
     {
+        //Beginn Parameterüberprüfung
         if(args.length != 1){
             System.out.println("Falsche Anzahl Parameter");
             syntaxteller();
             return;
         }
+        //Ende Parameterüberprüfung
         
+        //Die Datei Einlesen, falls die Rückgabe null ist ist ein Fehler aufgetreten
         Interval[] arr = dateiEinlesen(args[0]);
         if(arr == null) return;
         
+        //Anfang Ausgabe
         System.out.println();
         System.out.println("Bearbeite Datei: " + args[0] + ".");
         System.out.println();
         System.out.println("Es wurden " + arr.length + " Intervalle mit folgenden Inhalten gelesen:");
         
+        //Die eingelesenen Werte unsortiert ausgeben
         ausgabe(arr);
         
+        //Sortieren und Werte sortiert ausgeben
         mergeSort(arr);    
         System.out.println("Sortiert: ");
         ausgabe(arr);
         
+        //Intervallscheduling durchführen und ausgeben
         System.out.println("Berechnetes Intervallscheduling");
-        
         ArrayList<Interval> x = intervalScheduling(arr);
         arr = new Interval[x.size()];
         arr = x.toArray(arr);
@@ -39,6 +45,9 @@ public class Anwendung
         
     }
     
+    /**
+     * Gibt das übergebene Array formatiert aus
+     */
     private static void ausgabe(Interval[] arr)
     {        
         String a = "[";
@@ -57,10 +66,14 @@ public class Anwendung
         
     }
     
+    /**
+     * Liest die Datei im übergebenen Pfad ein und gibt ein Array mit den gefundenen Intervallen aus
+     */
     private static Interval[] dateiEinlesen(String pfad)
     {
         RandomAccessFile file;
         
+        //Versuche die Datei einzulesen, es können Fehler auftreten die abgefangen werden
         try{
             file = new RandomAccessFile(pfad, "r");
         }
@@ -78,10 +91,12 @@ public class Anwendung
         
         boolean endOfFileReached = false;
         
+        //Die Schleife geht die eingelesene Datei Zeile für Zeile durch und führt 
         while(!endOfFileReached)
         {
             StringTokenizer st = null;
             
+            //Versuche die nächste Zeile einzulesen
             try{
                  st = new StringTokenizer(file.readLine(), ",");
             }
@@ -98,7 +113,7 @@ public class Anwendung
                 continue; //Wenn die Datei zuende ist Rest der Schleife überspringen
             }
 
-            
+            //solange noch Tokens vorhanden sind lese das nächste Inverall und füge es zur Liste hinzu
             while(st.hasMoreTokens())
             {
                 int start = Integer.parseInt(st.nextToken());
@@ -117,6 +132,9 @@ public class Anwendung
         
     }
     
+    /**
+     * Wendet Intervalscheduling auf das übergebene Array aus
+     */
     private static ArrayList<Interval> intervalScheduling(Interval[] array)
     {
         int n = array.length;
@@ -134,12 +152,18 @@ public class Anwendung
         return arrlist;
     }
     
+    /**
+     * Hilfsmethode zur Ausgabe des korrekten Syntax
+     */
     private static void syntaxteller()
     {
         System.out.println("Korrekter Syntax: Anwendung (Pfad zur Datei)");
         System.out.println();
     }
     
+    //-----------------------------------------------------------------------------------------------------------
+    //Ab hier: Mergesort
+    //-----------------------------------------------------------------------------------------------------------
     private static void mergeSort(Interval[] array){
         mergeSort(array,0, array.length-1);
     }
