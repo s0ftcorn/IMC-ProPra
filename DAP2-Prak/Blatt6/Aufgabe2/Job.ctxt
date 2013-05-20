@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=pDuration\ pDeadline
+comment0.target=Job(int,\ int)
+comment1.params=
+comment1.target=int\ getDuration()
+comment2.params=
+comment2.target=int\ getDeadline()
+numComments=3

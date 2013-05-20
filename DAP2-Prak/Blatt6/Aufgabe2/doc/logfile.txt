@@ -1,0 +1,62 @@
+Class documentation
+<---- javadoc command: ---->
+/usr/lib/jvm/java-6-openjdk-amd64/bin/javadoc
+-author
+-version
+-nodeprecated
+-package
+-noindex
+-notree
+-nohelp
+-nonavbar
+-source
+1.6
+-classpath
+/usr/share/bluej/bluejcore.jar:/usr/share/bluej/junit-4.8.2.jar:/home/chris/IMC-ProPra/DAP2-Prak/Blatt6/Aufgabe2
+-d
+/home/chris/IMC-ProPra/DAP2-Prak/Blatt6/Aufgabe2/doc
+-encoding
+UTF-8
+-charset
+UTF-8
+-docletpath
+/usr/share/bluej/bjdoclet.jar
+-doclet
+bluej.doclet.doclets.formats.html.HtmlDoclet
+/home/chris/IMC-ProPra/DAP2-Prak/Blatt6/Aufgabe2/Anwendung.java
+<---- end of javadoc command ---->
+Loading source file /home/chris/IMC-ProPra/DAP2-Prak/Blatt6/Aufgabe2/Anwendung.java...
+/home/chris/IMC-ProPra/DAP2-Prak/Blatt6/Aufgabe2/Anwendung.java:74: illegal start of expression
+    private static void ausgabe(Interval[] arr)
+    ^
+/home/chris/IMC-ProPra/DAP2-Prak/Blatt6/Aufgabe2/Anwendung.java:74: illegal start of expression
+    private static void ausgabe(Interval[] arr)
+            ^
+/home/chris/IMC-ProPra/DAP2-Prak/Blatt6/Aufgabe2/Anwendung.java:74: ';' expected
+    private static void ausgabe(Interval[] arr)
+                  ^
+/home/chris/IMC-ProPra/DAP2-Prak/Blatt6/Aufgabe2/Anwendung.java:74: '.class' expected
+    private static void ausgabe(Interval[] arr)
+                                           ^
+/home/chris/IMC-ProPra/DAP2-Prak/Blatt6/Aufgabe2/Anwendung.java:74: ';' expected
+    private static void ausgabe(Interval[] arr)
+                                              ^
+/home/chris/IMC-ProPra/DAP2-Prak/Blatt6/Aufgabe2/Anwendung.java:95: illegal start of expression
+    private static Interval[] dateiEinlesen(String pfad)
+    ^
+/home/chris/IMC-ProPra/DAP2-Prak/Blatt6/Aufgabe2/Anwendung.java:95: illegal start of expression
+    private static Interval[] dateiEinlesen(String pfad)
+            ^
+/home/chris/IMC-ProPra/DAP2-Prak/Blatt6/Aufgabe2/Anwendung.java:95: ';' expected
+    private static Interval[] dateiEinlesen(String pfad)
+                             ^
+/home/chris/IMC-ProPra/DAP2-Prak/Blatt6/Aufgabe2/Anwendung.java:95: ')' expected
+    private static Interval[] dateiEinlesen(String pfad)
+                                                  ^
+/home/chris/IMC-ProPra/DAP2-Prak/Blatt6/Aufgabe2/Anwendung.java:95: illegal start of expression
+    private static Interval[] dateiEinlesen(String pfad)
+                                                       ^
+/home/chris/IMC-ProPra/DAP2-Prak/Blatt6/Aufgabe2/Anwendung.java:95: ';' expected
+    private static Interval[] dateiEinlesen(String pfad)
+                                                        ^
+11 errors
