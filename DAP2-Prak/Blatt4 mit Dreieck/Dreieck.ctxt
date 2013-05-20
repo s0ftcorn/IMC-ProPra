@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.params=x1\ y1\ x2\ y2\ x3\ y3
+comment0.target=Dreieck(int,\ int,\ int,\ int,\ int,\ int)
+comment1.params=a\ b\ c
+comment1.target=Dreieck(Punkt,\ Punkt,\ Punkt)
+comment2.params=
+comment2.target=Punkt\ getA()
+comment3.params=
+comment3.target=Punkt\ getB()
+comment4.params=
+comment4.target=Punkt\ getC()
+comment5.params=p1\ p2
+comment5.target=double\ euclidDistance(Punkt,\ Punkt)
+comment6.params=
+comment6.target=double\ umfang()
+comment7.params=punkte
+comment7.target=boolean\ containsPunkte(Punkt[])
+comment8.params=P
+comment8.target=boolean\ contains(Punkt)
+numComments=9

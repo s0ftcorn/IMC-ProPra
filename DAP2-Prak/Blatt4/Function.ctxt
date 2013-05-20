@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=a\ b\ c\ d
+comment0.target=Function(int,\ int,\ int,\ int)
+comment1.params=a\ b
+comment1.target=Function(Punkt,\ Punkt)
+comment2.params=
+comment2.target=double\ getm()
+comment3.params=
+comment3.target=double\ getb()
+comment4.params=x1\ y1\ x2\ y2
+comment4.target=void\ makeFunc(int,\ int,\ int,\ int)
+comment5.params=p
+comment5.target=boolean\ isRight(Punkt)
+numComments=6

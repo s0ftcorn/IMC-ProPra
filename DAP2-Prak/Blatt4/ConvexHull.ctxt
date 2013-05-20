@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=P
+comment0.target=java.util.LinkedList\ simpleConvex(Punkt[])
+comment1.params=p1\ p2
+comment1.target=boolean\ gleichePunkte(Punkt,\ Punkt)
+numComments=2

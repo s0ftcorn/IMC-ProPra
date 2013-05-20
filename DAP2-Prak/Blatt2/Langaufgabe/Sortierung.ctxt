@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.params=args
+comment0.target=void\ main(java.lang.String[])
+comment1.params=array
+comment1.target=void\ insertionSort(int[])
+comment2.params=array
+comment2.target=void\ mergeSort(int[])
+comment2.text=\n\ Hilfsmethode\ f\u00FCr\ mergeSort\n\ @param\ array\ Das\ zu\ sortierende\ Feld\n
+comment3.params=arr\ p\ r
+comment3.target=void\ mergeSort(int[],\ int,\ int)
+comment3.text=\n\ Sortiert\ das\ \u00FCbergebene\ Feld\ nach\ dem\ Mergesort-Verfahren\n\ @param\ arr\ \ \ Das\ (Teil-)Feld,\ welches\ sortiert\ werden\ soll\n\ @param\ p\ \ \ \ \ Index\ der\ linken\ Grenze\n\ @param\ r\ \ \ \ \ Index\ der\ rechten\ Grenze\n
+comment4.params=intArr\ p\ q\ r
+comment4.target=void\ merge(int[],\ int,\ int,\ int)
+comment4.text=\n\ Sortiert\ 2\ Teilfelder\ zu\ einem\ kombinierten,\ sortierten\ Feld\n\ @param\ intArr\ \ \ \ Feld,\ auf\ dem\ gearbeitet\ wird\n\ @param\ p\ \ \ \ \ \ \ \ \ Index\ der\ linken\ Grenze\n\ @param\ q\ \ \ \ \ \ \ \ \ Index\ der\ Mitte\ (rechte\ Grenze\ vom\ linken\ Teilfeld)\n\ @param\ r\ \ \ \ \ \ \ \ \ Index\ der\ rechten\ Grenze\n
+comment5.params=len\ method
+comment5.target=int[]\ initiateArr(int,\ java.lang.String)
+comment5.text=\ Ineffizienter\ Algorithmus,\ ohne\ Array-Gr\u00F6\u00DFen-Optimerung\n\ \ \ \ private\ static\ void\ merge(int[]\ intArr,\ int\ p,\ int\ q,\ int\ r){\n\ \ \ \ int[]\ arr\ \=\ new\ int[intArr.length];\n\n\ \ \ \ //hilfsarray\ initialisieren\ mit\ Werten\ aus\ dem\ zu\ sortierenden\ Array\n\ \ \ \ for(\ int\ i\ \=\ p;\ i\ <\=\ r;\ i++){\n\ \ \ \ arr[i]\ \=\ intArr[i];\n\ \ \ \ }\n\n\ \ \ \ int\ i\ \=\ p;\ \ \ \ \ \ //Laufvariable\ vom\ linken\ Teilfeld\n\ \ \ \ int\ j\ \=\ q\ +\ 1;\ \ //Laufvariable\ vom\ rechten\ Teilfeld\n\ \ \ \ int\ k\ \=\ p;\ \ \ \ \ \ //Laufvaraible\ vom\ neuen,\ sortierten\ Feld\n\n\ \ \ \ //\ den\ jeweils\ kleinsten\ wert\ von\ links\ oder\ rechts\ zur\u00FCck\ ins\ zu\ sortierende\ ArrayinitiateArr;\n\ \ \ \ while(i\ <\=\ q\ &&\ j\ <\=\ r){\n\ \ \ \ if(arr[i]\ <\=\ arr[j]){\n\ \ \ \ intArr[k]\ \=\ arr[i];\n\ \ \ \ i++;\n\ \ \ \ }else{\n\ \ \ \ intArr[k]\ \=\ arr[j];\n\ \ \ \ j++;\n\ \ \ \ }\n\ \ \ \ k++;\n\ \ \ \ }\n\n\ \ \ \ //den\ rest\ der\ linken\ seite\ ins\ zu\ sortierende\ array\n\ \ \ \ while(i\ <\=\ q){\n\ \ \ \ intArr[k++]\ \=\ arr[i++];\n\ \ \ \ }\n\ \ \ \ }\n
+comment6.params=arr
+comment6.target=boolean\ isSorted(int[])
+comment7.params=arr\ anfang\ ende
+comment7.target=boolean\ isSorted(int[],\ int,\ int)
+comment8.params=
+comment8.target=void\ syntaxteller()
+numComments=9

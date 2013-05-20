@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=x\ y
+comment0.target=Punkt(int,\ int)
+comment1.params=
+comment1.target=Punkt()
+comment2.params=p
+comment2.target=boolean\ equals(Punkt)
+comment3.params=
+comment3.target=int\ getX()
+comment4.params=
+comment4.target=int\ getY()
+numComments=5
