@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.params=args
+comment0.target=void\ main(java.lang.String[])
+comment1.params=arr
+comment1.target=void\ ausgabe(Interval[])
+comment2.params=pfad
+comment2.target=Interval[]\ dateiEinlesen(java.lang.String)
+comment3.params=array
+comment3.target=java.util.ArrayList\ intervalScheduling(Interval[])
+comment4.params=
+comment4.target=void\ syntaxteller()
+comment5.params=array
+comment5.target=void\ mergeSort(Interval[])
+comment6.params=arr\ p\ r
+comment6.target=void\ mergeSort(Interval[],\ int,\ int)
+comment7.params=intArr\ p\ q\ r
+comment7.target=void\ merge(Interval[],\ int,\ int,\ int)
+numComments=8
