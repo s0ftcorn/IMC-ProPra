@@ -40,15 +40,10 @@ public class Anwendung
         //Ende Parameterüberprüfung
 
         //Die Datei Einlesen, falls die Rückgabe null ist ist ein Fehler aufgetreten
-        if(lateness)
-        {
-            Job[] arr = dateiEinlesen(pfad);
-        }
-        else{
-            Interval[] arr = dateiEinlesen(pfad);
-        }
+        
+        Interval[] arr = dateiEinlesen(pfad);
         if(arr == null) return;
-
+        
         //Anfang Ausgabe
         System.out.println();
         System.out.println("Bearbeite Datei: " + pfad + ".");
@@ -63,13 +58,25 @@ public class Anwendung
         System.out.println("Sortiert: ");
         ausgabe(arr);
 
-        System.out.println("Berechnetes Intervallscheduling");
-        ArrayList<Interval> x = intervalScheduling(arr);
-        arr = new Interval[x.size()];
-        arr = x.toArray(arr);
-        ausgabe(arr);
+        //Ausgabe abhängig von Lateness oder Intervallscheduling
+        if(!lateness)
+        {
+            System.out.println("Berechnetes Intervallscheduling");
+            ArrayList<Interval> x = intervalScheduling(arr);
+            arr = new Interval[x.size()];
+            arr = x.toArray(arr);
+            ausgabe(arr);
+            
+        }
+        else{
+            System.out.println("Berechnetes Latenessscheduling");
+            Job[] jobarr = convertArray(arr);
+            int[] intarr = latenessScheduling(jobarr);
+            ausgabe(intarr);
+            System.out.println();
+            System.out.println("Maximale Verzögerung: " + maxDelay(intarr, jobarr));
+        }
         System.out.println("----------------------------------------------------------");
-
     }
 
     /**
@@ -91,6 +98,27 @@ public class Anwendung
         System.out.println();
 
     }
+    
+    /**
+     * Ausgabe-Methode für den Lateness-Algo
+     */
+    private static void ausgabe(int[] arr)
+    {
+        String a = "[";
+
+        for(int i = 0; i < arr.length; i++)
+        {
+            a = a + arr[i] + ", ";
+        }
+
+        a = a.substring(0, a.length()-2);
+        a = a + "]";
+
+        System.out.println(a);
+        System.out.println();
+    }
+    
+    
 
     /**
      * Liest die Datei im übergebenen Pfad ein und gibt ein Array mit den gefundenen Intervallen aus
@@ -151,14 +179,51 @@ public class Anwendung
         Interval[] ausgabe = new Interval[arrlist.size()];
         ausgabe = arrlist.toArray(ausgabe);
         return ausgabe;
-
     }
     
-    private static Job[] dateiEinlesen(String pfad)
+    /**
+     * Berechnet die maximale Verzögerung des übergebenen Jobarrays mit dem übergebenen Schedule
+     */
+    private static int maxDelay(int[] schedule, Job[] jobarr)
     {
-        return null;
+        int ausgabe = 0;
+        for(int i = 0; i < schedule.length; i++)
+        {
+            int a = schedule[i] +jobarr[i].getDuration() - jobarr[i].getDeadline();
+            if(a > ausgabe) ausgabe = a;
+        }
+        return ausgabe;
     }
 
+    /**
+     * Konvertiert ein Interval-Array zu einem Job-Array
+     */
+    private static Job[] convertArray(Interval[] arr)
+    {
+        Job[] ausgabe = new Job[arr.length];
+        for(int i = 0; i < arr.length; i++)
+        {
+            ausgabe[i] = arr[i].toJob();
+        }
+        return ausgabe;
+    }
+    
+    /**
+     * Lateness-Scheduling-Algorithmus aus der Vorlesung
+     */
+    private static int[] latenessScheduling(Job[] arr)
+    {
+        int n = arr.length;
+        int[] ausgabe = new int[n];
+        int z = 0;
+        for(int i = 0; i < n; i++)
+        {
+            ausgabe[i] = z;
+            z = z + arr[i].getDuration();
+        }
+        return ausgabe;
+    }
+    
     /**
      * Wendet Intervalscheduling auf das übergebene Array aus
      */

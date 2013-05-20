@@ -25,4 +25,9 @@ public class Interval
         return "Intervall Start: " + start + ", Ende: " + end;
     }
     
+    public Job toJob()
+    {
+        return new Job(start, end);
+    }
+
 }
