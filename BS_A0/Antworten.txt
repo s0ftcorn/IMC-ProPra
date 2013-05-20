@@ -1,0 +1,30 @@
+Theoriefragen:
+1. 
+chown, chgrp und chmod dienen zur Rechteverwaltung für Dateien.
+Mit chown kann man die "Inhaberschaft" an einer Datei, oder eines Ordners ändern, das geht
+mit Usernamen aber auch mit Gruppen.
+Um die Datei "Beispiel.txt" der Gruppe "studis" zuzuordnen wäre der Befehl:
+chown :studis beispiel.txt
+Der Doppelpunkt muss vor den Gruppennamen, damit chown "weiß", dass es sich um eine Gruppe handelt.
+Wird der Doppelpunkt weggelassen, so ist das Argument für chown ein Benutername.
+Wenn Benutzername oder Gruppe nicht angegeben wird, so wird diese nicht geändert.
+chgrp ändert die Gruppenzugehörigkeit von Dateien und Ordnern, wenn man selber zur Gruppe gehört, 
+oder superuser bzw. root ist.
+Mit chmod ändert man die Zugriffsrechte für eine Datei, man bearbeitet dabei jeweils die Rechte von den:
+- Besitzern der Datei
+- Der zugeordneten Gruppe der Datei
+- den anderen
+- oder von allen.
+Man kann dabei für jede "Klasse" einzeln die Schreib-, Lese- und Ausführrechte bearbeiten.
+2.
+cp -r /home/studi/beispiel1/ /home/studi/beispiel2/unterordner/
+"-r" steht dabei für Rekursiv, d.h. der Ordner wird rekursiv durchgegangen und alle Inhalte mitsamt des
+Ordners selbst kopiert.
+4.
+Der Abstand zweier direkt Hintereinander angelegter Variablen vom Typ char ist ein Byte, da die
+Variablen direkt nacheinander in den Speicher gelegt werden und ein Char ist ein Byte groß.
+5.
+Eine globale Variable, egal welchen Typs, wird immer im BSS (bei unitialiesierten Daten) bzw.
+im Datensegment werden dementsprechen vorinitialisierte Daten gespeichert.
+Eine lokale Variable landet jedoch auf dem Stack, der an einer wesentlich höheren Addresse anfängt,
+da der Stack nach unten "wächst".
