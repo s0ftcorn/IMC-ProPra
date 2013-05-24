@@ -39,7 +39,7 @@ public class Anwendung
         }
         //Ende Parameterüberprüfung
 
-        //Die Datei Einlesen, falls die Rückgabe null ist ist ein Fehler aufgetreten
+        //Die Datei Einlesen, falls die Rückgabe null ist, ist ein Fehler aufgetreten
         
         Interval[] arr = dateiEinlesen(pfad);
         if(arr == null) return;
