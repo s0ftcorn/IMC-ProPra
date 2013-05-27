@@ -8,14 +8,14 @@ void* getraenkeundspeisen(void *pv);
 void* ueberweisen(void *pv);
 
 int main(int argc, char **argv){
-	kontostand = 1000;
-	
 	int status_film;
 	pthread_t thread_film;
 	int status_nahrung;
 	pthread_t thread_nahrung;
 	int status_uberweiung;
 	pthread_t thread_uberweisung;
+	
+	kontostand = 1000;
 	
 	status_film = pthread_create(&thread_film, NULL, &filmebestellen, NULL);
 	if(status_film) printf("Fehler beim Filmthread");
