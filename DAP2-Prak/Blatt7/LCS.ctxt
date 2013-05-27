@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=args
+comment0.target=void\ main(java.lang.String[])
+comment1.params=x\ y
+comment1.target=int[][]\ LCSlaenge(java.lang.String,\ java.lang.String)
+comment2.params=x\ y\ c\ i\ j
+comment2.target=void\ laengenberechnung(java.lang.String,\ java.lang.String,\ int[][],\ int,\ int)
+comment3.params=n\ r
+comment3.target=java.lang.String\ randStr(int,\ java.util.Random)
+comment4.params=
+comment4.target=void\ syntaxteller()
+numComments=5
