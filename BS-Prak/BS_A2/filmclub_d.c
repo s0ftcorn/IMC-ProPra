@@ -4,6 +4,7 @@
 
 int kontostand;
 pthread_mutex_t lock;
+pthread_cond_t cond;
 
 void* filmebestellen(void *pv);
 void* getraenkeundspeisen(void *pv);
@@ -20,6 +21,9 @@ int main(int argc, char **argv){
 	kontostand = 1000;
 	if( pthread_mutex_init(&lock, NULL) != 0 ){
 		printf("Fehler beim initialisieren des Mutex\n");
+	}
+	if(pthread_cond_init(&cond, NULL) != 0){
+		printf("Fehler beim initialisieren der Condition-Variable\n");
 	}
 	
 	// printf("Mutex beim Start des Programms: %d\n",lock);
@@ -46,12 +50,16 @@ int main(int argc, char **argv){
 	
 	if( pthread_mutex_destroy(&lock) != 0) printf("Konnte Mutex nicht zerstören\n");
 	pthread_exit(NULL);
+	if( pthread_cond_destroy(&cond) != 0 ) printf("Konnte Cond-Variable nicht zerstören\n");
 }
 
 void* filmebestellen(void *pv){
 	int localkonto;
 	int counter = 0;
 	while(counter < 5){
+		if( kontostand < 0){
+			pthread_cond_wait(&cond, &lock);
+		}
 		sleep(1);
 		if( pthread_mutex_trylock(&lock)  != 0){
 			printf("Mutex konnte nicht gelockt werden\n");
@@ -77,6 +85,9 @@ void* getraenkeundspeisen(void *pv){
 	int localkonto;
 	int counter = 0;
 	while(counter < 5){
+		if( kontostand < 0){
+			pthread_cond_wait(&cond, &lock);
+		}
 		sleep(1);
 		if( pthread_mutex_trylock(&lock) != 0 ){
 			printf("Mutex konnte nicht gelockt werden\n");
@@ -121,6 +132,9 @@ void* ueberweisen(void *pv){
 				printf("Mutex konnte nicht geunlockt werden\n");
 			}
 			counter++;
+		}
+		if(kontostand > 0){
+			pthread_cond_signal(&cond);
 		}
 	}
 	
