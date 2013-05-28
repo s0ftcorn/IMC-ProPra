@@ -50,6 +50,7 @@ void* filmebestellen(void *pv){
 	int localkonto;
 	int counter = 0;
 	while(counter < 5){
+		sleep(1);
 		if( pthread_mutex_lock(&lock)  != 0){
 			printf("Mutex konnte nicht gelockt werden\n");
 			printf("warte...\n");
@@ -73,6 +74,7 @@ void* getraenkeundspeisen(void *pv){
 	int localkonto;
 	int counter = 0;
 	while(counter < 5){
+		sleep(1);
 		if( pthread_mutex_lock(&lock) != 0 ){
 			printf("Mutex konnte nicht gelockt werden\n");
 			printf("warte...\n");
@@ -98,12 +100,14 @@ void* ueberweisen(void *pv){
 	int localkonto;
 	int counter = 0;
 	while(counter < 2){
+		sleep(1);
 		if( pthread_mutex_lock(&lock) != 0){
 			printf("Mutex konnte nicht gelockt werden\n");
 			printf("warte...\n");
 			sleep(8);
 		}else{
 			printf("Ueberweise Geld\n");
+			localkonto = kontostand;
 			printf("Kontostand vorher %d\n",localkonto);
 			localkonto += 2000;
 			kontostand = localkonto;
@@ -111,6 +115,7 @@ void* ueberweisen(void *pv){
 			if( pthread_mutex_unlock(&lock) != 0 ){
 				printf("Mutex konnte nicht geunlockt werden\n");
 			}
+			counter++;
 		}
 	}
 	
