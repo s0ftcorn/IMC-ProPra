@@ -53,8 +53,10 @@ public class LCS
             c[0][j] = 0;
         for(int i = 1; i<m+1; i++)
         {
+            //Invariante: In Zelle [i-1][n] steht die Länge des längsten gemeinsamen Teilstring von x[1 bis (i-1)] und y
             for(int j = 1; j<n+1; j++)
             {
+                //Invariante: In Zelle [i][j-1] steht die Länge des längsten gemeinsamen Teilstring von x[1 bis i] und y[1 bis (j-1)]
                 laengenberechnung(x, y, c, i, j);
             }
         }
