@@ -57,22 +57,22 @@ void* filmebestellen(void *pv){
 	int localkonto;
 	int counter = 0;
 	while(counter < 5){
-		if( kontostand < 0){
-			pthread_cond_wait(&cond, &lock);
-		}
 		sleep(1);
 		if( pthread_mutex_trylock(&lock)  != 0){
-			printf("Mutex konnte nicht gelockt werden\n");
+			printf("FILME Mutex konnte nicht gelockt werden\n");
 			printf("warte...\n");
 			sleep(2);
 		}else{
+			if( kontostand - 200 < 0){
+			pthread_cond_wait(&cond, &lock);
+			}
 			// printf("Gelockter Mutex %d\n",lock);
 			printf("Bestelle Filme\n");
 			localkonto = kontostand;
-			printf("Kontostand vorher: %d\n",localkonto);
+			//printf("Kontostand vorher: %d\n",localkonto);
 			localkonto -= 200;
 			kontostand = localkonto;
-			printf("Kontostand nachher: %d\n",localkonto);
+			// printf("Kontostand nachher: %d\n",localkonto);
 			if( pthread_mutex_unlock(&lock) != 0) printf("Mutex konnte nicht geunlockt werden\n");
 			counter++;
 		}
@@ -85,22 +85,22 @@ void* getraenkeundspeisen(void *pv){
 	int localkonto;
 	int counter = 0;
 	while(counter < 5){
-		if( kontostand < 0){
-			pthread_cond_wait(&cond, &lock);
-		}
 		sleep(1);
 		if( pthread_mutex_trylock(&lock) != 0 ){
-			printf("Mutex konnte nicht gelockt werden\n");
+			printf("NAHRNUNG Mutex konnte nicht gelockt werden\n");
 			printf("warte...\n");
 			sleep(3);
 		}else{
+			if( kontostand -400 < 0){
+			pthread_cond_wait(&cond, &lock);
+			}
 			// printf("Gelockter Mutex %d\n",lock);
 			printf("Kaufe Getraenke und Speisen\n");
 			localkonto = kontostand;
-			printf("Kontostand vorher %d\n",localkonto);
+			// printf("Kontostand vorher %d\n",localkonto);
 			localkonto -= 400;
 			kontostand = localkonto;
-			printf("Kontostand nachher: %d\n",localkonto);
+			// printf("Kontostand nachher: %d\n",localkonto);
 			if( pthread_mutex_unlock(&lock) != 0 ){
 				printf("Mutex konnte nicht entsperrt werden\n");
 			}
@@ -117,17 +117,17 @@ void* ueberweisen(void *pv){
 	while(counter < 2){
 		sleep(1);
 		if( pthread_mutex_trylock(&lock) != 0){
-			printf("Mutex konnte nicht gelockt werden\n");
+			printf("UEBERWEISEN Mutex konnte nicht gelockt werden\n");
 			printf("warte...\n");
 			sleep(8);
 		}else{
 			// printf("Gelockter Mutex %d\n",lock);
 			printf("Ueberweise Geld\n");
 			localkonto = kontostand;
-			printf("Kontostand vorher %d\n",localkonto);
+			// printf("Kontostand vorher %d\n",localkonto);
 			localkonto += 2000;
 			kontostand = localkonto;
-			printf("Kontostand nachher %d\n",localkonto);
+			// printf("Kontostand nachher %d\n",localkonto);
 			if( pthread_mutex_unlock(&lock) != 0 ){
 				printf("Mutex konnte nicht geunlockt werden\n");
 			}
