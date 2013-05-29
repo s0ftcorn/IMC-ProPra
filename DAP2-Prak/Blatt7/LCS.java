@@ -32,27 +32,28 @@ public class LCS
         
         long tStart = System.currentTimeMillis();
         
-        LCSlaenge(x, y);
+        int[][] arr = LCSlaenge(x, y);
         
         long tEnd = System.currentTimeMillis();
         float tDiff = tEnd-tStart;
         
         System.out.println("Lauf mit Stringlänge " + n + ": " + (tDiff/1000) + " Sekunden");
+        System.out.println("Länge der längsten gemeinsamen Teilsequenz: " + arr[n][n]);
     }
     
-    private static int[][] LCSlaenge(String x, String y)
+    public static int[][] LCSlaenge(String x, String y)
     {
         int m = x.length();
         int n = y.length();
         int[][] c = new int[m+1][n+1];
         
-        for(int i = 0; i<m; i++)
+        for(int i = 0; i<m+1; i++)
             c[i][0] = 0;
-        for(int j = 0; j<n; j++)
+        for(int j = 0; j<n+1; j++)
             c[0][j] = 0;
-        for(int i = 1; i<m; i++)
+        for(int i = 1; i<m+1; i++)
         {
-            for(int j = 1; j<n; j++)
+            for(int j = 1; j<n+1; j++)
             {
                 laengenberechnung(x, y, c, i, j);
             }
@@ -63,7 +64,7 @@ public class LCS
 
     private static void laengenberechnung(String x, String y, int[][] c, int i, int j)
     {
-        if(x.charAt(i) == y.charAt(j))
+        if(x.charAt(i-1) == y.charAt(j-1))
             c[i][j] = (c[i-1][j-1]+1);
         else
         {
@@ -73,6 +74,9 @@ public class LCS
         }
     }
     
+    /**
+     * Erzeugt einen zufälligen String mit der Länge n
+     */
     private static String randStr(int n, Random r) {
         String alphabet ="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         StringBuilder res = new StringBuilder(n);
@@ -81,6 +85,9 @@ public class LCS
         return res.toString();
     }  
     
+    /**
+     * Gibt den korrekten Syntax aus
+     */
     private static void syntaxteller()
     {
         System.out.println("Korrekter Syntax: LCS (Länge der Zufallsfolgen)");
