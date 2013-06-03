@@ -1,0 +1,35 @@
+﻿1.
+Aktives Warten:
+Der Prozess "fragt" jedes mal nach ob er das Betriebsmittel vom Betriebssystem
+zur verfügung gestellt bekommt, dies ist dementsprechend Auslastender und
+der Prozess muss sich darum kümmern, dass hierbei keine Fehler passieren.
+Passives Warten:
+Das Betriebssystem signalisiert dem schlafenden Prozess, dass er Zugang zum
+Betriebsmittel bekommt, hierbei muss das Betriebssystem dafür sorgen, dass
+keine Fehler passieren, ferner ist dies wenig zusätzliche Arbeit, da das Be-
+triebssystem dies gleich beim freiwerden der Resource signalisieren kann.
+2.
+Der Konvoi-Effekt ensteht bei dem First Come First Served Scheduling.
+Ein Beispiel wären ein CPU-Intensiver Prozess und mehrere E/A-Intensiver Prozesse:
+Der CPU-Intensive blockiert die CPU lange, währen der Rest der Prozesse untätt ist,
+blockiert jedoch der CPU-Intensive doch wegen E/A, so sind die anderen Prozesse der 
+Reihe nach an der CPU, da sie jedoch E/A-Intensiv sind, gehen sie wieder recht schnell 
+ins Warten über und der CPU-Intensive Prozess ist wieder dran. Dadurch erhöht sich die
+Wartezeit der E/A-Intensiven Prozesse um ein vielfaches, während der CPU-Intensive Prozess
+die meiste Zeit bekommt. Das ganze kommt dadurch zustande, dass der FCFS-Scheduler den Prozess
+zuerst an die CPU lässt, der zuerst in der Warteschlange steht.
+3.
+   A    B    C   D     E    A     B     D   A    B  
+<----><----><-><----><---><----><----><---><--><--->
+Ein Bindestrich steht hierbei für eine Millisekunde, hier nochmal die Version
+ohne Bindestriche sondern mit Zeitangaben:
+A 4ms
+B 4ms
+C 1ms
+D 4ms
+E 3ms
+A 4sm
+B 4ms
+D 3ms
+A 2ms
+B 3ms
