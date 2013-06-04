@@ -20,7 +20,7 @@ public class Editierdistanz
         if(args.length == 1)
         {
             ArrayList<String> arrlist = dateiEinlesen(args[0]);
-            while(arrlist.size > 1)
+            while(arrlist.size() > 1)
             {
                 String str1 = arrlist.get(0);
                 String str2 = arrlist.get(1);
@@ -29,7 +29,19 @@ public class Editierdistanz
                 System.out.println("String 1: " + str1);
                 System.out.println("String 2: " + str2);
                 System.out.println("Editierdistanz: " + berechneDistanz(str1, str2));
+                System.out.println();
             }
+        }
+        
+        if(args.length == 2)
+        {
+            String str1 = args[0];
+            String str2 = args[1];
+            
+            System.out.println("String 1: " + str1);
+            System.out.println("String 2: " + str2);
+            System.out.println("Editierdistanz: " + berechneDistanz(str1, str2));
+            System.out.println();
         }
     }
     
