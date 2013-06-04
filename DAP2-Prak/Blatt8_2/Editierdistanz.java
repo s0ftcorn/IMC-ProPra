@@ -1,5 +1,3 @@
-package Aufgabe2;
-
 import java.lang.Math;
 import java.util.ArrayList;
 import java.io.RandomAccessFile;
@@ -22,6 +20,9 @@ public class Editierdistanz
         if(args.length == 1)
         {
             ArrayList<String> arrlist = dateiEinlesen(args[0]);
+            if(arrlist == null){    //Datei nicht gefunden
+                return;
+            }
             while(arrlist.size() > 1)
             {
                 String str1 = arrlist.get(0);
@@ -30,7 +31,8 @@ public class Editierdistanz
                 arrlist.remove(0);
                 System.out.println("String 1: " + str1);
                 System.out.println("String 2: " + str2);
-                System.out.println("Editierdistanz: " + berechneDistanz(str1, str2)[str1.length()][str2.length()]);
+                int[][] zwischen = berechneDistanz(str1, str2);
+                System.out.println("Editierdistanz: " + zwischen[str1.length()][str2.length()]);
                 System.out.println();
             }
         }
@@ -40,6 +42,9 @@ public class Editierdistanz
             if(args[1].equals("-o"))
             {
                 ArrayList<String> arrlist = dateiEinlesen(args[0]);
+                if(arrlist == null){    //Datei nicht gefunden
+                    return;
+                }
                 while(arrlist.size() > 1)
                 {
                     String str1 = arrlist.get(0);
@@ -60,7 +65,8 @@ public class Editierdistanz
             
                 System.out.println("String 1: " + str1);
                 System.out.println("String 2: " + str2);
-                System.out.println("Editierdistanz: " + berechneDistanz(str1, str2));
+                int[][] zwischen = berechneDistanz(str1, str2);
+                System.out.println("Editierdistanz: " + zwischen[str1.length()][str2.length()]);
                 System.out.println();
             }
         }
@@ -74,7 +80,7 @@ public class Editierdistanz
                 int[][] zwischen = berechneDistanz(str1, str2);
                 System.out.println("Loesung fuer '" + str1 + "' --> '" + str2 + "' mit Gesamtkosten " + zwischen[str1.length()][str2.length()] + ":");
                 System.out.println("===================================================");
-                ausgabeEditieroperationen(str1.length(), str2.length(), zwischen);
+                ausgabeEditieroperationen(str1, str2, zwischen);
                 System.out.println();
             }
             else{
@@ -157,17 +163,20 @@ public class Editierdistanz
     
     private static void ausgabeEditieroperationen(int i, int j, String a, String b, int[][] arr)
     {
-        if(i == 0 && j == 0){
+        if(i == 0 || j == 0){
             return;
         }
         if(i != 0 && arr[i][j] == (arr[i-1][j]+1)){
-            System.out.println("lösche " + a.charAt(i));
+            System.out.println("lösche " + a.charAt(i-1));
             ausgabeEditieroperationen(i-1, j, a, b, arr);
         }
         else if(j != 0 && arr[i][j] == (arr[i][j-1]+1)){
-            System.out.println("füge ein " + b.charAt(j));
+            System.out.println("füge ein " + b.charAt(j-1));
             ausgabeEditieroperationen(i, j-1, a, b, arr);
         }
+        else{
+            System.out.println("ersetze " + a.charAt(i-1) + " durch " + b.charAt(j-1));
+            ausgabeEditieroperationen(i-1, j-1, a, b, arr);
         }
     }
 }
