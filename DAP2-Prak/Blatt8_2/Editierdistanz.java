@@ -84,12 +84,6 @@ public class Editierdistanz
                 System.out.println("===================================================");
                 ausgabeEditieroperationen(str1, str2, zwischen);
                 System.out.println();
-                for(int i = 0; i < zwischen.length; i++){
-            for(int j = 0; j < zwischen[i].length; j++){
-            System.out.print(zwischen[i][j] + ", ");
-            }
-            System.out.println();
-                }
             }
             else{
                 System.out.println("Falsche Anzahl an Parametern");
@@ -191,7 +185,7 @@ public class Editierdistanz
                     return ausgabeEditieroperationen(i-1, j-1, a, b, arr, temp)+ret;
                 } else {
                     String ret = "\nKosten 1: Ersetze " + a.charAt(i-1) + " durch " + b.charAt(j-1)+" an der Position "+j+" --> "+temp;
-                    temp = temp.substring(0,j-1) + a.charAt(j-1) + temp.substring(j, temp.length());
+                    temp = temp.substring(0,j-1) + a.charAt(i-1) + temp.substring(j, temp.length());
                     return ausgabeEditieroperationen(i-1, j-1, a, b, arr, temp)+ret;
                 }
             }
