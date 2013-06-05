@@ -17,6 +17,7 @@ public class Editierdistanz
             return;
         }
         
+        // Falls die Argumentarraylänge 1 ist, so liegt der Fall vor, dass wir aus einer Datei einlesen
         if(args.length == 1)
         {
             ArrayList<String> arrlist = dateiEinlesen(args[0]);
@@ -32,7 +33,7 @@ public class Editierdistanz
                 System.out.println();
             }
         }
-        
+        // Falls die Argumentarraylänge 2 ist, so "bekommen" wir zwei Strings als Parameter übergeben
         if(args.length == 2)
         {
             String str1 = args[0];
@@ -50,6 +51,7 @@ public class Editierdistanz
         int laengeA = a.length();
         int laengeB = b.length();
         int[][] arr = new int[laengeA+1][laengeB+1];
+        // Vorinitialisierung der "einfachen" Fälle
         arr[0][0] = 0;
         for(int i = 1; i <= laengeA; i++){
             arr[i][0] = i;
@@ -57,6 +59,7 @@ public class Editierdistanz
         for(int j = 1; j <= laengeB; j++){
             arr[0][j] = j;
         }
+        // Hier passiert dann voodoo
         for(int i = 1; i <= laengeA; i++){
             for(int j = 1; j <= laengeB; j++){
                 int stringsGleich = ((a.charAt(i - 1) == b.charAt(j - 1)) ? 0 : 1);
@@ -73,7 +76,7 @@ public class Editierdistanz
         RandomAccessFile file;
         try{
             file = new RandomAccessFile(pfad, "r");
-        }
+        } // Abfangen der Exceptions bei den jeweiligen Fehlerfällen
         catch(FileNotFoundException e){
             System.out.println("Fehler beim Einlesen der Datei: Datei nicht gefunden, Pfad korrigieren");
             return null;

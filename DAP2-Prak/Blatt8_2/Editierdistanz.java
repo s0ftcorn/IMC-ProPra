@@ -39,6 +39,7 @@ public class Editierdistanz
         
         if(args.length == 2)
         {
+	    // Abfangen der Möglichkeit, dass wir den -o Parameter kriegen
             if(args[1].equals("-o"))
             {
                 ArrayList<String> arrlist = dateiEinlesen(args[0]);
@@ -52,6 +53,7 @@ public class Editierdistanz
                     arrlist.remove(1);
                     arrlist.remove(0);
                     int[][] zwischen = berechneDistanz(str1, str2);
+                    // "Formatierte" Ausgabe
                     System.out.println("Loesung fuer '" + str1 + "' --> '" + str2 + "' mit Gesamtkosten " + zwischen[str1.length()][str2.length()] + ":");
                     System.out.println("===================================================");
                     ausgabeEditieroperationen(str1, str2, zwischen);
@@ -82,6 +84,12 @@ public class Editierdistanz
                 System.out.println("===================================================");
                 ausgabeEditieroperationen(str1, str2, zwischen);
                 System.out.println();
+                for(int i = 0; i < zwischen.length; i++){
+			for(int j = 0; j < zwischen[i].length; j++){
+			System.out.print(zwischen[i][j] + ", ");
+			}
+			System.out.println();
+                }
             }
             else{
                 System.out.println("Falsche Anzahl an Parametern");
@@ -161,6 +169,7 @@ public class Editierdistanz
         ausgabeEditieroperationen(a.length(), b.length(), a, b, arr);
     }
     
+    // Und hier Black Magic
     private static void ausgabeEditieroperationen(int i, int j, String a, String b, int[][] arr)
     {
         if(i == 0 || j == 0){

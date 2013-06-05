@@ -72,10 +72,10 @@ void* filmebestellen(void *pv){
 			/* printf("Gelockter Mutex %d\n",lock); */
 			printf("Bestelle Filme\n");
 			localkonto = kontostand;
-			/* printf("Kontostand vorher: %d\n",localkonto); */
+			printf("Kontostand vorher: %d\n",localkonto);
 			localkonto -= 200;
 			kontostand = localkonto;
-			/* printf("Kontostand nachher: %d\n",localkonto); */
+			printf("Kontostand nachher: %d\n",localkonto);
 			if( pthread_mutex_unlock(&lock) != 0) printf("Mutex konnte nicht geunlockt werden\n");
 			counter++;
 		}
@@ -101,10 +101,10 @@ void* getraenkeundspeisen(void *pv){
 			/* printf("Gelockter Mutex %d\n",lock); */
 			printf("Kaufe Getraenke und Speisen\n");
 			localkonto = kontostand;
-			/* printf("Kontostand vorher %d\n",localkonto); */
+			printf("Kontostand vorher %d\n",localkonto);
 			localkonto -= 400;
 			kontostand = localkonto;
-			/* printf("Kontostand nachher: %d\n",localkonto); */
+			printf("Kontostand nachher: %d\n",localkonto);
 			if( pthread_mutex_unlock(&lock) != 0 ){
 				printf("Mutex konnte nicht entsperrt werden\n");
 			}
@@ -128,10 +128,10 @@ void* ueberweisen(void *pv){
 			/* printf("Gelockter Mutex %d\n",lock); */
 			printf("Ueberweise Geld\n");
 			localkonto = kontostand;
-			/* printf("Kontostand vorher %d\n",localkonto); */
+			printf("Kontostand vorher %d\n",localkonto);
 			localkonto += 2000;
 			kontostand = localkonto;
-			/* printf("Kontostand nachher %d\n",localkonto); */
+			printf("Kontostand nachher %d\n",localkonto);
 			if( pthread_mutex_unlock(&lock) != 0 ){
 				printf("Mutex konnte nicht geunlockt werden\n");
 			}
