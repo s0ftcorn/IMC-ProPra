@@ -94,8 +94,7 @@ int main (void) {
 	 * Der Vaterprozess uebernimmt die Deadlockerkennung.
 	 */
 	deadlock_erkennung();
-
-	sem_destroy(&sem_a);
+	
 	return 0;
 }
 
@@ -278,5 +277,6 @@ void programmabbruch(int sig) {
 
 	/* HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil b): */
 
+	sem_destroy(&sem_a);
 	exit(0);
 }
