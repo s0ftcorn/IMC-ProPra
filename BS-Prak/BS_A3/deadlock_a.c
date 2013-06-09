@@ -134,12 +134,24 @@ void *dozenten_thread(void *id) {
 		 */
 		sem_post(&sem_a);
 		printf("Dozent_%c: Jetzt habe ich schon einmal den Notebook oder den Beamer.\n", c);
-
+		
+		if(c == 'A'){
+			dozenten_status[DOZENT_A] = WARTEN;
+			printf("Dozent_A: Ich warte auf Notebook oder Beamner.\n");
+		}else{
+			dozenten_status[DOZENT_B] = WARTEN;
+			printf("Dozent_B: Ich warte auf Notebook oder Beamner.\n");
+		}
 		/* 
 		 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a): Den Zustand des Dozenten
 		 * auf WARTEN setzen.
 		 */
 
+		if(c == 'A'){
+			
+		}else{
+			
+		}
 		/* 
 		 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a):
 		 * Die beiden Personen brauchen unterschiedlich lange um Notebook oder Beamer abzuholen
