@@ -17,7 +17,7 @@ enum STATUS {FREIZEIT, WARTEN, BENUTZEN};
 pthread_t dozenten[2];
 enum STATUS dozenten_status[2];
 
-
+sem_t sem_a;
 /*
  * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a) + b): 
  * entsprechenden Semaphor-Objekte vom Typ sem_t anlegen
@@ -54,7 +54,6 @@ int main (void) {
 		exit(EXIT_FAILURE);
 	}
 
-
 	/*
 	 * Der Status der Dozenten wird zunaechst auf FREIZEIT gesetzt.
 	 */
@@ -62,6 +61,10 @@ int main (void) {
 	dozenten_status[DOZENT_B] = FREIZEIT;
 
 
+	if( sem_init(&sem_a,0,2) == -1){
+		printf("Fehler beim initialisieren des Semaphors!\n");
+		exit(0);
+	}
 	/*
 	 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a) + b): 
 	 * Die Geraete entsprechen also den Ressourcen.
@@ -92,7 +95,7 @@ int main (void) {
 	 */
 	deadlock_erkennung();
 
-
+	sem_destroy(&sem_a);
 	return 0;
 }
 
@@ -124,11 +127,12 @@ void *dozenten_thread(void *id) {
 
 		printf("Dozent_%c: Mal schauen, ob das Notebook oder der Beamer verfuegbar ist.\n", c);
 
+		sem_wait(&sem_a);
 		/* 
 		 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a):
 		 * Wir schauen, ob das erste Geraet verfuegbar ist.
 		 */
-
+		sem_post(&sem_a);
 		printf("Dozent_%c: Jetzt habe ich schon einmal den Notebook oder den Beamer.\n", c);
 
 		/* 
