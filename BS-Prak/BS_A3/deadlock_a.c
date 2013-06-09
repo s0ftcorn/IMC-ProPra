@@ -132,7 +132,6 @@ void *dozenten_thread(void *id) {
 		 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a):
 		 * Wir schauen, ob das erste Geraet verfuegbar ist.
 		 */
-		sem_post(&sem_a);
 		printf("Dozent_%c: Jetzt habe ich schon einmal den Notebook oder den Beamer.\n", c);
 		
 		if(c == 'A'){
@@ -148,11 +147,9 @@ void *dozenten_thread(void *id) {
 		 */
 
 		if(c == 'A'){
-			sem_wait(&sem_a);
 			sleep(3);
 			
 		}else{
-			sem_wait(&sem_a);
 			sleep(5);
 		}
 		/* 
