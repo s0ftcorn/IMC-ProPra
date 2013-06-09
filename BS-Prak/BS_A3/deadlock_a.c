@@ -148,9 +148,12 @@ void *dozenten_thread(void *id) {
 		 */
 
 		if(c == 'A'){
+			sem_wait(&sem_a);
+			sleep(3);
 			
 		}else{
-			
+			sem_wait(&sem_a);
+			sleep(5);
 		}
 		/* 
 		 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a):
@@ -159,7 +162,16 @@ void *dozenten_thread(void *id) {
 		 */
 
 		printf("Dozent_%c: Mal schauen, ob das zweite Geraet auch verfuegbar ist.\n", c);
-
+		
+		if(c == 'A'){
+			sem_wait(&sem_a);
+			sleep(3);
+			
+		}else{
+			sem_wait(&sem_a);
+			sleep(5);
+		}
+		/* 
 		/*
 		 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a): 
 		 * Wir schauen, ob das zweite Gerate auch verfuegbar ist
@@ -177,12 +189,21 @@ void *dozenten_thread(void *id) {
 		sleep(5);
 
 		printf("Dozent_%c: Die Veranstaltung ist beendet, nun bringe ich beide Geraet wieder zurueck!\n", c);
-
+		
+		sem_post(&sem_a);
+		sem_post(&sem_a);
 		/* 
 		 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a): 
 		 * Fertig mit der Arbeit, alle Geraete zurueck geben
 		 */
 
+		if(c == 'A'){
+			dozenten_status[DOZENT_A] = FREIZEIT;
+			printf("Dozent_A: Ich warte auf Notebook oder Beamner.\n");
+		}else{
+			dozenten_status[DOZENT_B] = FREIZEIT;
+			printf("Dozent_B: Ich warte auf Notebook oder Beamner.\n");
+		}
 		/* 
 		 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a):
 		 * Status eines Dozenten-Threads auf FREIZEIT setzen
