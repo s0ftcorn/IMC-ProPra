@@ -171,7 +171,7 @@ void *dozenten_thread(void *id) {
 			sem_wait(&sem_a);
 			sleep(5);
 		}
-		/* 
+
 		/*
 		 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a): 
 		 * Wir schauen, ob das zweite Gerate auch verfuegbar ist
