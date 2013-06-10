@@ -18,6 +18,7 @@ pthread_t dozenten[2];
 enum STATUS dozenten_status[2];
 
 sem_t sem_a;
+sem_t sem_det;
 /*
  * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a) + b): 
  * entsprechenden Semaphor-Objekte vom Typ sem_t anlegen
@@ -63,6 +64,10 @@ int main (void) {
 
 	if( sem_init(&sem_a,0,2) == -1){
 		printf("Fehler beim initialisieren des Semaphors!\n");
+		exit(0);
+	}
+	if( sem_init(&sem_det,0,2) == -1){
+		printf("Fehler beim initialisieren des Semaphors\n");
 		exit(0);
 	}
 	/*
@@ -134,11 +139,15 @@ void *dozenten_thread(void *id) {
 		printf("Dozent_%c: Jetzt habe ich schon einmal den Notebook oder den Beamer.\n", c);
 		
 		if(c == 'A'){
+			sem_wait(&sem_det);
 			dozenten_status[DOZENT_A] = WARTEN;
 			printf("Dozent_A: Ich warte auf Notebook oder Beamner.\n");
+			sem_post(&sem_det);
 		}else{
+			sem_wait(&sem_det);
 			dozenten_status[DOZENT_B] = WARTEN;
 			printf("Dozent_B: Ich warte auf Notebook oder Beamner.\n");
+			sem_post(&sem_det); 
 		}
 		/* 
 		 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a): Den Zustand des Dozenten
@@ -194,11 +203,15 @@ void *dozenten_thread(void *id) {
 		 */
 
 		if(c == 'A'){
+			sem_wait(&sem_det);
 			dozenten_status[DOZENT_A] = FREIZEIT;
 			printf("Dozent_A: Ich warte auf Notebook oder Beamner.\n");
+			sem_post(&sem_det);
 		}else{
+			sem_wait(&sem_det);
 			dozenten_status[DOZENT_B] = FREIZEIT;
 			printf("Dozent_B: Ich warte auf Notebook oder Beamner.\n");
+			sem_post(&sem_det);
 		}
 		/* 
 		 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a):
@@ -259,7 +272,9 @@ void deadlock_erkennung(void) {
 	while (1) {
 		sleep(12);
 
-		/* HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil b): */
+		sem_wait(&sem_det);
+		sem_wait(&sem_det):
+		if( (dozenten_status[DOZENT_A] == WARTEN) && (dozenten_status[DOZENT_B] == WARTEN) )
 
 	}
 }
@@ -277,6 +292,13 @@ void programmabbruch(int sig) {
 
 	/* HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil b): */
 
+	if( pthread_cancel(&dozenten[0]) != 0){
+		printf("Fehler beim abbrechen der Dozenten\n");
+	}
+	if( pthread_cancel(&dozenten[1]) != 0){
+		printf("Fehler beim abbrechen der Dozenten\n");
+	}
+	sem_destroy(&sem_det);
 	sem_destroy(&sem_a);
 	exit(0);
 }
