@@ -269,12 +269,26 @@ void freizeit(int dozent, char c) {
  */
 
 void deadlock_erkennung(void) {
+	int id_a = DOZENT_A;
 	while (1) {
 		sleep(12);
 
 		sem_wait(&sem_det);
-		sem_wait(&sem_det):
-		if( (dozenten_status[DOZENT_A] == WARTEN) && (dozenten_status[DOZENT_B] == WARTEN) )
+		sem_wait(&sem_det);
+			if( (dozenten_status[DOZENT_A] == WARTEN) && (dozenten_status[DOZENT_B] == WARTEN) ){
+			printf("Deadlock erkannt!\n");
+			printf("Toete einen Nigger!\n");
+			if( pthread_cancel(dozenten[DOZENT_A]) != 0){
+			printf("Fehler beim abbrechen der Dozenten\n");
+			}
+			sem_post(&sem_a);
+			if (pthread_create(&dozenten[DOZENT_A], NULL, &dozenten_thread, (void *) &id_a) != 0) {
+			perror("Create DOZENT_A");
+			exit(EXIT_FAILURE);
+			}
+		}
+		sem_post(&sem_det);
+		sem_post(&sem_det);
 
 	}
 }
@@ -291,11 +305,11 @@ void deadlock_erkennung(void) {
 void programmabbruch(int sig) {
 
 	/* HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil b): */
-
-	if( pthread_cancel(&dozenten[0]) != 0){
+	printf("Signal %d caught!\n",sig);
+	if( pthread_cancel(dozenten[0]) != 0){
 		printf("Fehler beim abbrechen der Dozenten\n");
 	}
-	if( pthread_cancel(&dozenten[1]) != 0){
+	if( pthread_cancel(dozenten[1]) != 0){
 		printf("Fehler beim abbrechen der Dozenten\n");
 	}
 	sem_destroy(&sem_det);
