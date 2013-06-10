@@ -6,16 +6,25 @@ public class Partition
     {
         if(args.length == 0)
         {
-            System.out.println
+            System.out.println("Zu wenig Parameter");
+            syntaxteller();
+            return;
         }
+        
         ArrayList<Integer> arrlist = new ArrayList<Integer>();
         for(int i = 0; i < args.length; i++)
         {
-            arrlist.add(Integer.parseInt(args[i]));
+            try{arrlist.add(Integer.parseInt(args[i]));}
+            catch(NumberFormatException e){
+                System.out.println("Bitte nur ganze Zahlen eingeben");
+                syntaxteller();
+                return;
+            }
         }
         
-        if(berechnePartition(arrlist)){System.out.println("True");}
-        else{System.out.println("False");}
+        if(berechnePartition(arrlist)){System.out.println("Eingabe ist partitionierbar");}
+        else{System.out.println("Eingabe ist nicht partitionierbar");}
+        System.out.println();
     }
     
     private static boolean berechnePartition(ArrayList<Integer> z)

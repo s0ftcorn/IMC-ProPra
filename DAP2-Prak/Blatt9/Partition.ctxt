@@ -3,4 +3,6 @@ comment0.params=args
 comment0.target=void\ main(java.lang.String[])
 comment1.params=z
 comment1.target=boolean\ berechnePartition(java.util.ArrayList)
-numComments=2
+comment2.params=
+comment2.target=void\ syntaxteller()
+numComments=3
