@@ -39,6 +39,7 @@ public class Editierdistanz
         
         if(args.length == 2)
         {
+        // Abfangen der MÃ¶glichkeit, dass wir den -o Parameter kriegen
             if(args[1].equals("-o"))
             {
                 ArrayList<String> arrlist = dateiEinlesen(args[0]);
@@ -52,6 +53,7 @@ public class Editierdistanz
                     arrlist.remove(1);
                     arrlist.remove(0);
                     int[][] zwischen = berechneDistanz(str1, str2);
+                    // "Formatierte" Ausgabe
                     System.out.println("Loesung fuer '" + str1 + "' --> '" + str2 + "' mit Gesamtkosten " + zwischen[str1.length()][str2.length()] + ":");
                     System.out.println("===================================================");
                     ausgabeEditieroperationen(str1, str2, zwischen);
@@ -158,25 +160,35 @@ public class Editierdistanz
     
     private static void ausgabeEditieroperationen(String a, String b, int[][] arr)
     {
-        ausgabeEditieroperationen(a.length(), b.length(), a, b, arr);
+        System.out.println(ausgabeEditieroperationen(a.length(), b.length(), a, b, arr, b ));
     }
     
-    private static void ausgabeEditieroperationen(int i, int j, String a, String b, int[][] arr)
+    // Und hier Black Magic
+    private static String ausgabeEditieroperationen(int i, int j, String a, String b, int[][] arr, String temp)
     {
         if(i == 0 || j == 0){
-            return;
-        }
-        if(i != 0 && arr[i][j] == (arr[i-1][j]+1)){
-            System.out.println("lÃ¶sche " + a.charAt(i-1));
-            ausgabeEditieroperationen(i-1, j, a, b, arr);
-        }
-        else if(j != 0 && arr[i][j] == (arr[i][j-1]+1)){
-            System.out.println("fÃ¼ge ein " + b.charAt(j-1));
-            ausgabeEditieroperationen(i, j-1, a, b, arr);
-        }
-        else{
-            System.out.println("ersetze " + a.charAt(i-1) + " durch " + b.charAt(j-1));
-            ausgabeEditieroperationen(i-1, j-1, a, b, arr);
+            return "";
+        } else {
+            if(arr[i][j] == (arr[i-1][j]+1)){
+                String ret = "\nKosten 1: Lšsche " + a.charAt(i-1)+" an der Position "+j+" --> "+temp;
+                temp = temp.substring(0,j)+a.charAt(i-1)+temp.substring(j, temp.length());
+                return ausgabeEditieroperationen(i-1, j, a, b, arr, temp) + ret;
+            }
+            else if(arr[i][j] == (arr[i][j-1]+1)){
+                String ret = "\nKosten 1: FŸge " + b.charAt(j-1)+" an der Position "+j+" ein --> "+temp;
+                temp = temp.substring(0,j-1) + temp.substring(j, temp.length());
+                return ausgabeEditieroperationen(i, j-1, a, b, arr, temp) +ret;
+            }
+            else{
+                if (a.charAt(i-1) == b.charAt(j-1)) {
+                    String ret = "\nKosten 0: Ersetze " + a.charAt(i-1) + " durch " + b.charAt(j-1)+" an der Position "+j+" --> "+temp;
+                    return ausgabeEditieroperationen(i-1, j-1, a, b, arr, temp)+ret;
+                } else {
+                    String ret = "\nKosten 1: Ersetze " + a.charAt(i-1) + " durch " + b.charAt(j-1)+" an der Position "+j+" --> "+temp;
+                    temp = temp.substring(0,j-1) + a.charAt(i-1) + temp.substring(j, temp.length());
+                    return ausgabeEditieroperationen(i-1, j-1, a, b, arr, temp)+ret;
+                }
+            }
         }
     }
 }
