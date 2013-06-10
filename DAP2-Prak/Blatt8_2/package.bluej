@@ -7,11 +7,19 @@ package.numDependencies=0
 package.numTargets=1
 package.showExtends=true
 package.showUses=true
+<<<<<<< HEAD
+project.charset=UTF-8
+target1.editor.height=773
+target1.editor.width=1303
+target1.editor.x=64
+target1.editor.y=-4
+=======
 project.charset=MacRoman
 target1.editor.height=773
 target1.editor.width=1280
 target1.editor.x=0
 target1.editor.y=23
+>>>>>>> 747871e11e4baa146e54a57fb21d912b6f62ee50
 target1.height=50
 target1.name=Editierdistanz
 target1.naviview.expanded=true
