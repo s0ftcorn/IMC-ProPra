@@ -16,7 +16,12 @@ public class Partition
         {
             try{arrlist.add(Integer.parseInt(args[i]));}
             catch(NumberFormatException e){
-                System.out.println("Bitte nur ganze Zahlen eingeben");
+                System.out.println("Bitte nur natürliche Zahlen eingeben");
+                syntaxteller();
+                return;
+            }
+            if(arrlist.get(i) < 0){
+                System.out.println("Bitte nur positive Zahlen eingeben");
                 syntaxteller();
                 return;
             }
@@ -27,35 +32,38 @@ public class Partition
         System.out.println();
     }
     
-    private static boolean berechnePartition(ArrayList<Integer> z)
+    private static boolean berechnePartition(ArrayList<Integer> zahlen)
     {
-        int W = 0;
-        for(int i = 0; i < z.size(); i++)
+        int summe = 0;
+        for(int i = 0; i < zahlen.size(); i++)
         {
-            W += z.get(i);
+            summe += zahlen.get(i);
         }
-        if(W % 2 != 0) return false; //Summe ist ungerade => unteilbar in 2 gleiche Partitionen
+        if(summe % 2 != 0) return false; //Summe ist ungerade => unteilbar in 2 gleiche Partitionen
         
-        boolean[][] G = new boolean[z.size()+1][W+1];
-        for(int i = 0; i <= z.size(); i++)
+        boolean[][] G = new boolean[zahlen.size()+1][summe+1];
+        for(int i = 0; i <= zahlen.size(); i++)
         {
-            for(int j = 0; j <= (W/2); j++)
+            // In G[i-1][summe/2] steht ob das Array bis zum Index i partitionierbar ist.
+            for(int j = 0; j <= (summe/2); j++)
             {
-                if(j==0){ G[i][j] = true;}
-                    else if(i==0){ G[i][j] = false;}
-                        else if(G[i-1][j]==true || (z.get(i-1)<=j && G[i-1][j-z.get(i-1)]) == true){
-                            G[i][j] = true;
+                // Für G[i-1][j-1] gilt, dass es wahr ist, wenn sich eine teilmenge der Zahlen mit den indizes 1 bis i-1 a die summe j-1 darstellen kann.
+                if(j==0){ G[i][j] = true;} // Ist die Summe 0, so ist diese immer partitionierbar
+                    else if(i==0){ G[i][j] = false;} // Die Leere Summe ist nicht partitionierbar
+                        else if(G[i-1][j]==true || (zahlen.get(i-1)<=j && G[i-1][j-zahlen.get(i-1)]) == true){
+                            G[i][j] = true; 
                         }
-                            else{G[i][j] = false;}
+                        else{G[i][j] = false;
+                        }
             }
         }
         
-        return G[z.size()][W/2];
+        return G[zahlen.size()][summe/2];
     }
     
     private static void syntaxteller()
     {
-        System.out.println("Korrekter Syntax: java Partition (Ganze Zahlen)");
+        System.out.println("Korrekter Syntax: java Partition (natürliche Zahlen)");
         System.out.println();
     }
 }
