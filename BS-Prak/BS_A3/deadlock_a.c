@@ -16,12 +16,8 @@ enum STATUS {FREIZEIT, WARTEN, BENUTZEN};
 
 pthread_t dozenten[2];
 enum STATUS dozenten_status[2];
-
-sem_t sem_a;
-/*
- * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a) + b): 
- * entsprechenden Semaphor-Objekte vom Typ sem_t anlegen
- */
+/* Deklaration des Semaphors für die Geräte */
+sem_t sem_gerat;
 
 
 /* Funktionen deklarieren */
@@ -60,22 +56,13 @@ int main (void) {
 	dozenten_status[DOZENT_A] = FREIZEIT;
 	dozenten_status[DOZENT_B] = FREIZEIT;
 
-
-	if( sem_init(&sem_a,0,2) == -1){
-		printf("Fehler beim initialisieren des Semaphors!\n");
+	/*Initialisieren des Semaphors mit 2 */
+	if( sem_init(&sem_gerat,0,2) == -1){
+		/*Auslesen des Fehlerwertes aus errno */
+		perror("Fehler beim initialisieren des Semaphors!\n");
 		exit(0);
 	}
-	/*
-	 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a) + b): 
-	 * Die Geraete entsprechen also den Ressourcen.
-	 * Hier soll ein Semaphor mit 2 initialisiert werden, um die beiden
-	 * Ressourcen (Notebook und Beamer) darzustellen. Diese Semaphore symbolisiert
-	 * die Verfuegbarkeit der Ressourcen.
-	 */
-
-
-
-
+	
 	/*
 	 * Die Dozenten-Threads werden nun erzeugt.
 	 */
@@ -126,13 +113,11 @@ void *dozenten_thread(void *id) {
 
 		printf("Dozent_%c: Mal schauen, ob das Notebook oder der Beamer verfuegbar ist.\n", c);
 
-		sem_wait(&sem_a);
-		/* 
-		 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a):
-		 * Wir schauen, ob das erste Geraet verfuegbar ist.
-		 */
+		/*Semaphor um eins dekrementieren, da eine Resource belegt ist*/
+		sem_wait(&sem_gerat);
 		printf("Dozent_%c: Jetzt habe ich schon einmal den Notebook oder den Beamer.\n", c);
 		
+		/*Zustände entsprechend aendern*/
 		if(c == 'A'){
 			dozenten_status[DOZENT_A] = WARTEN;
 			printf("Dozent_A: Ich warte auf Notebook oder Beamner.\n");
@@ -140,45 +125,36 @@ void *dozenten_thread(void *id) {
 			dozenten_status[DOZENT_B] = WARTEN;
 			printf("Dozent_B: Ich warte auf Notebook oder Beamner.\n");
 		}
-		/* 
-		 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a): Den Zustand des Dozenten
-		 * auf WARTEN setzen.
-		 */
 
+		/*Dozenten brauchen unterschiedlich viel Zeit*/
 		if(c == 'A'){
 			sleep(3);
 			
 		}else{
 			sleep(5);
 		}
-		/* 
-		 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a):
-		 * Die beiden Personen brauchen unterschiedlich lange um Notebook oder Beamer abzuholen
-		 * Dozent_A braucht dafuer 3 Sekunden, Dozent_B 5 Sekunden (sleep(...);).
-		 */
 
 		printf("Dozent_%c: Mal schauen, ob das zweite Geraet auch verfuegbar ist.\n", c);
 		
+		/*Jeweilige Dozenten nehmen sich das andere Geraet und brauchen dafür unterschiedlich viel Zeit*/
 		if(c == 'A'){
-			sem_wait(&sem_a);
+			sem_wait(&sem_gerat);
 			sleep(3);
 			
 		}else{
-			sem_wait(&sem_a);
+			sem_wait(&sem_gerat);
 			sleep(5);
 		}
 
-		/*
-		 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a): 
-		 * Wir schauen, ob das zweite Gerate auch verfuegbar ist
-		 */
-
 		printf("Dozent_%c: Jetzt habe ich den Notebook und den Beamer! Ich kann nun meine Veranstaltung durchfuehren!\n", c);
 
-		/* 
-		 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a): 
-		 * Status eines Dozenten-Threads auf BENUTZEN setzen
-		 */
+		if(c == 'A'){
+			dozenten_status[DOZENT_A] = BENUTZEN;
+			printf("Dozent_A: Arbeit arbeit.\n");
+		}else{
+			dozenten_status[DOZENT_B] = BENUTZEN;
+			printf("Dozent_B: Arbeit arbeit.\n");
+		}
 
 		/* Die Veranstaltung dauert 5 Sekunden */
 
@@ -186,12 +162,9 @@ void *dozenten_thread(void *id) {
 
 		printf("Dozent_%c: Die Veranstaltung ist beendet, nun bringe ich beide Geraet wieder zurueck!\n", c);
 		
-		sem_post(&sem_a);
-		sem_post(&sem_a);
-		/* 
-		 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a): 
-		 * Fertig mit der Arbeit, alle Geraete zurueck geben
-		 */
+		/*Geraete wieder "zurueckgeben" und Semaphor inkrementieren*/
+		sem_post(&sem_gerat);
+		sem_post(&sem_gerat);
 
 		if(c == 'A'){
 			dozenten_status[DOZENT_A] = FREIZEIT;
@@ -200,10 +173,6 @@ void *dozenten_thread(void *id) {
 			dozenten_status[DOZENT_B] = FREIZEIT;
 			printf("Dozent_B: Ich warte auf Notebook oder Beamner.\n");
 		}
-		/* 
-		 * HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil a):
-		 * Status eines Dozenten-Threads auf FREIZEIT setzen
-		 */
 
 		/* 
 		 * Hier wird die Freizeit eines Dozenten-Threads berechnet. Veraendert den
@@ -276,7 +245,7 @@ void deadlock_erkennung(void) {
 void programmabbruch(int sig) {
 
 	/* HIER MUSS EUER CODE EINGEFUEGT WERDEN Aufgabenteil b): */
-
-	sem_destroy(&sem_a);
+	/*Vernünftiges zerstören des Semaphors */
+	sem_destroy(&sem_gerat);
 	exit(0);
 }

@@ -1,0 +1,49 @@
+1)
+Bei einem Deadlock befinden sich die Prozesse die der Verklemmung angehörenden Prozesse
+im wartenden Zustand, d.h. sie sind nicht aktiv und beanspruchen nicht die CPU.
+Bei einem Livelock wechseln die Prozesse jedoch ihren Zustand und beanspruchen so,
+wenn auch u.U. nur minimal die CPU.
+Man kann sich das ganze sehr gut mit zwei Personen vorstellen die durch eine Tür wollen.
+Bei einem Deadlock stehen beide Personen voreinander und warten darauf, dass der Weg frei wird,
+bewegen sich aber nicht.
+Bei einem Livelock entsteht die Situation die man hingegen aus dem alltag oft kennt:
+Beide Personen wechseln zeitgleich die Seite und versperren sich wieder den Weg.
+Ein Livelock ist deswegen auch das größere Übel, da eine erkennung sehr schwer ist,
+da man nicht genau sagen kann, ob der Prozess regulär den Zustand wechselt, oder sich
+in einer Art Endlosschleife befindet. Bei einem Deadlock hingegen "guck" man einfach,
+ob beide Prozesse im wartenden Zustand sind.
+2)
+Man kann zum einen einem Prozess einfach das Betriebsmittel entziehen, wodurch man
+die "no preemption" Bedingung nicht mehr erfüllt und aus dem Deadlock kommt.
+Je nach Art des Betriebsmittels kann man aber auch die Resource für mehrere Parteien
+nutzbar deklarieren, z.B. wenn es nur um Lesezugriffe geht, wodurch man die "mutual
+exclusion" Bedingung entkräftet.
+a)
+Bedingungen für ein Deadlock sind:
+"mutual exclusion":Erfüllt, da jedes Gerät nur von einem Dozenten genutzt werden kann.
+"hold and wait": Ebenfalls erfüllt, da ein Dozent ein Gerät solange behält, bis er das
+zweite Gerät ebenfalls erhält und ein weglegen ist aktuell nicht möglich, genau so
+können die Dozenten nicht echt gleichzeitig ein Gerät beanspruchen.
+"no preemption": Hat ein Dozent erstmal ein Gerät so denkt er nicht daran dieses
+wieder wegzulegen oder es sich von dem anderen nehmen zu lassen.
+"circular wait": Erfüllt, da z.B. Dozent A mit Beamer darauf wartet, dass das von 
+Dozent B belegte Notebook wieder frei wird, Dozent B wartet jedoch, dass der von 
+Dozent A belegte Beamer wieder frei wird. Damit beide aber die Veranstaltung anfangen
+können benötigen sie beide Geräte.
+b)
+Die Deadlock erkennung geht in diesem Fall sehr einfach:
+Sobald beide Dozenten im Zustand warten sind, haben wir einen Deadlock,
+sonst würde einer die Veranstaltung beginnen oder sich ein Gerät nehmen.
+Wenn beide im Zustand "Warten" sind, dann warten beide auf die Verfügbarkeit
+eines der Geräte.
+c)
+Man könnte zum einen den Prozess abbrechen, wodurch das Betriebsmittel
+wieder frei wird, hierbei muss man sich aber überlegen welchen Prozess
+man abschießt und feststellen welches das sinnvollste Opfer wäre, was durchaus
+schwierig sein kann. Oder alle Prozesse terminieren, was aber ein großer Schaden
+wäre.
+Man kann aber auch "nur" die Betriebsmittel entziehen, müsste sich hier aber auch
+überlegen welcher Prozess das sinnvollste Opfer wäre. Zusätzlich müsste man sich
+um die korrekte Abhandlung eines solchen Entzugs kümmern, da es sonst im späteren
+Verlauf zu problemen kommen kann. Ferner muss man hier aufpassen, dass kein Livelock
+entsteht, der ein noch größeres Problem wäre.
