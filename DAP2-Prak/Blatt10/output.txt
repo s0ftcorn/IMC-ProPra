@@ -1,0 +1,47 @@
+***************************************
+
+---------------------------------------
+Hash items with hash value 0:
+	key: 1742572154   -- info: 1
+---------------------------------------
+Hash items with hash value 1:
+	key: 758221208   -- info: 1
+	key: 838751546   -- info: 1
+	key: 1297299385   -- info: 1
+	key: 1374596279   -- info: 1
+---------------------------------------
+Hash items with hash value 2:
+	key: 1014460417   -- info: 1
+	key: 953385155   -- info: 1
+	key: 1909015335   -- info: 1
+	key: 33524735   -- info: 1
+---------------------------------------
+Hash items with hash value 3:
+	key: 982693345   -- info: 1
+	key: 1785562360   -- info: 1
+	key: 777717647   -- info: 1
+---------------------------------------
+Hash items with hash value 4:
+	key: 1602834435   -- info: 1
+---------------------------------------
+Hash items with hash value 5:
+---------------------------------------
+Hash items with hash value 6:
+	key: 1514448814   -- info: 1
+	key: 220962892   -- info: 1
+---------------------------------------
+Hash items with hash value 7:
+	key: 211804562   -- info: 1
+---------------------------------------
+Hash items with hash value 8:
+	key: 1273578920   -- info: 1
+---------------------------------------
+Hash items with hash value 9:
+	key: 382952709   -- info: 1
+	key: 1248421904   -- info: 1
+	key: 73683361   -- info: 1
+---------------------------------------
+
+The number of collisions is 11
+
+***************************************
