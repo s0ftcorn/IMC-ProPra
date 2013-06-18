@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.params=hashSize
+comment0.target=HashTable(int)
+comment1.params=hashSize\ hashFunc
+comment1.target=HashTable(int,\ java.lang.String)
+comment2.params=key
+comment2.target=void\ put(java.lang.String)
+comment3.params=key
+comment3.target=HashItem\ get(java.lang.String)
+comment4.params=
+comment4.target=void\ clear()
+comment5.params=
+comment5.target=int\ numberOfCollisions()
+comment6.params=
+comment6.target=void\ printHashTable()
+comment7.params=s
+comment7.target=int\ getHashOfString(java.lang.String)
+numComments=8

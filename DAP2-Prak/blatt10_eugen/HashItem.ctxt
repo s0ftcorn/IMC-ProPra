@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=k\ i
+comment0.target=HashItem(java.lang.String,\ int)
+comment1.params=i
+comment1.target=void\ setInfo(int)
+comment2.params=
+comment2.target=int\ getInfo()
+comment3.params=k
+comment3.target=void\ setKey(java.lang.String)
+comment4.params=
+comment4.target=java.lang.String\ getKey()
+numComments=5
