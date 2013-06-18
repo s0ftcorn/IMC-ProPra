@@ -137,7 +137,6 @@ public class CountWords{
         } else {
             // die Eingaben bearbeiten
             
-            // in diesen Block gelanden wir nur falls 1 <= args.length <= 3
             // der Erster Parameter ist immer die Dateiname, deswegen definieren wir fileName sofort
             String fileName = args[0];
             int hashSize = 10;
