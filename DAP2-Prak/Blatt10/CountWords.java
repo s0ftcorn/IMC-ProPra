@@ -191,6 +191,9 @@ public class CountWords{
             // wir sind ENDLICH MAL mit der Aufnahme der Parametern fertig
             // HashTable Object anlegen
             HashTable hTable = new HashTable(hashSize, hashType);
+            for (int i=0;i<words.length;i++) {
+                hTable.put( words[i] );
+            }
             
             // Datei einlesen
             RandomAccessFile file;
@@ -239,10 +242,8 @@ public class CountWords{
                         if (hItem != null) {
                             // das Wort ist vorhanden, info erhöhen
                             hItem.setInfo( hItem.getInfo() + 1 );
-                        } else {
-                            // wort in die Tabelle hinzufügen
-                            hTable.put( wort );
                         }
+                        // falls das Wort ist nicht vorhanden -> überspringen
                     }
                 }
             }

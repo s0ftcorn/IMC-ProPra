@@ -26,7 +26,8 @@ public class HashTable{
         int listNumber = getHashOfString(key) % hashArray.length;
         
         // HashItem generieren
-        HashItem toPut = new HashItem(key, 1);
+        // mit 0 initialisieren für CountWord
+        HashItem toPut = new HashItem(key, 0);
         
         // die richtige Liste durchgehen, und gucken, ob der Wert key schon drin ist
         for (int i=0; i<hashArray[listNumber].size(); i++) {
