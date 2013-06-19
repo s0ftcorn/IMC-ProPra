@@ -106,7 +106,7 @@ public class HashTable{
         if(hashFunc.equals("JSHash")){
             return Math.abs((int)GeneralHashFunctionLibrary.JSHash(s));
         } else {
-            // falls hashFunk ungleich JS ist, dann benutzen wir nach dem vorgegebenen Standard RSHash
+            // falls hashFunc ungleich JS ist, dann benutzen wir nach dem vorgegebenen Standard RSHash
             return Math.abs((int)GeneralHashFunctionLibrary.RSHash(s));
         }
     }
