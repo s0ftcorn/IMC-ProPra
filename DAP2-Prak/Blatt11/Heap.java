@@ -88,4 +88,20 @@ public class Heap
             return max;
         }
     }
+    
+    public void printHeap()
+    {
+        int levellimit = 1;
+        int count = 0;
+        for(int i = 1; i <= heapSize; i++){
+            System.out.print(arr[i] + " ");
+            count++;
+            if(count == levellimit){
+                levellimit *= 2;
+                count = 0;
+                System.out.println();
+            }
+        }
+        System.out.println();
+    }
 }

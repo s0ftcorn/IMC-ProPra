@@ -13,4 +13,6 @@ comment5.params=key
 comment5.target=void\ insert(int)
 comment6.params=
 comment6.target=int\ extractMax()
-numComments=7
+comment7.params=
+comment7.target=void\ printHeap()
+numComments=8
