@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=n
+comment0.target=Heap(int)
+comment1.params=i
+comment1.target=int\ left(int)
+comment2.params=i
+comment2.target=int\ right(int)
+comment3.params=i
+comment3.target=int\ parent(int)
+comment4.params=i
+comment4.target=void\ heapify(int)
+comment5.params=key
+comment5.target=void\ insert(int)
+comment6.params=
+comment6.target=int\ extractMax()
+numComments=7
