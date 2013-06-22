@@ -76,31 +76,31 @@ static void metadaten_ausgabe(char *dateiname) {
         }
         
         offset = 3;
-        for(i = offset; i < offset+31; i++){
+        for(i = 0; i < 31; i++){
                 tag.title[i] = buf[offset+i];
         }
         tag.title[31] = '\0';
         
         offset= 33;
-        for(i = offset; i < offset+31; i++){
+        for(i = 0; i < 31; i++){
                 tag.artist[i] = buf[offset+i];
         }
         tag.artist[31] = '\0';
         
         offset = 63;
-        for(i = offset; i < offset+31; i++){
+        for(i = 0; i < 031; i++){
                 tag.album[i] = buf[offset+i];
         }
         tag.album[31] = '\0';
         
         offset = 93;
-        for(i = offset; i < offset+5; i++){
+        for(i = 0; i < 4; i++){
                 tag.year[i] = buf[offset+i];
         }
-        tag.year[5] = '\0';
-        
+        tag.year[4] = '\0';
+
         offset = 97;
-        for(i = offset; i < offset+30; i++){
+        for(i = 0; i < 30; i++){
                 tag.comment[i] = buf[offset+i];
         }
         tag.comment[30] = '\0';
