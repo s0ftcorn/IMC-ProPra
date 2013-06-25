@@ -57,10 +57,11 @@ static void metadaten_ausgabe(char *dateiname) {
         
         r_bytes = read(r_fd,buf,128);
 	if(r_bytes < 128 && r_bytes != -1){
-                printf("Evtl. ging etwas schief");
+                printf("Evtl. ging etwas schief\n");
 	}else if(r_bytes == -1){
                 perror("Fehler beim lesen.\n");
 	}
+	
 	if( close(r_fd) == -1 ){
                 perror("Fehler beim schließen der Datei.\n");
 	}
