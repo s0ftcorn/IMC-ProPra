@@ -82,7 +82,7 @@ static void metadaten_einabe(char *kommentar, char *dateiname){
                         perror("Fehler beim öffnen der Datei\n");
                 }
                 
-                int retval = lseek(w_fd,-125L,SEEK_END);
+                int retval = lseek(w_fd,-31L,SEEK_END);
                 if(retval == -1){
                         perror("Fehler beim setzen des Filedeskriptor\n");
                 }
