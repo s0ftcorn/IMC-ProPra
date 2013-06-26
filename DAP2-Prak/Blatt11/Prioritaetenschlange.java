@@ -36,13 +36,14 @@ public class Prioritaetenschlange
         
         for(int i = 0; i < k; i++){
             int x = numberGenerator.nextInt(4); //Fallunterscheidung mit 25% Wahrscheinlichkeiten
-            if(x==0){
+            if(x==0){   //25% Wahrscheinlichkeit: Füge neues Element ein und stelle Heap-Struktur her
                 int z = numberGenerator.nextInt(101);
                 heap.insert(z);
+                heap.heapify(1);
                 System.out.println("Füge Job mit Prioritaet " + z + " ein.");
                 heap.printHeap();
             }
-            else{
+            else{   //75% Wahrscheinlichkeit: Entferne ein Element und gib es aus (Struktur wird wiederhergestellt)
                 int z = heap.extractMax();
                 System.out.println("Job mit Prioritaet " + z + " fertig.");
                 heap.printHeap();

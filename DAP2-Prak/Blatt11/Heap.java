@@ -18,21 +18,33 @@ public class Heap
         arr = new int[limit+1];
     }
     
+    /**
+     * Gibt den Index des linken Kindes zurück
+     */
     public int left(int i)
     {
         return i*2;
     }
     
+    /**
+     * Gibt den Index des rechten Kindes zurück
+     */
     public int right(int i)
     {
         return i*2+1;
     }
     
+    /**
+     * Gibt den Index des Elternknotens zurück
+     */
     public int parent(int i)
     {
         return i/2;
     }
     
+    /**
+     * Stellt die Heap-Struktur für den Knoten mit Index i und dessen Kinder her
+     */
     public void heapify(int i)
     {
         int l = left(i);
@@ -56,6 +68,10 @@ public class Heap
         
     }
     
+    /**
+     * Fügt einen neuen Knoten mit dem Schlüssel key ein
+     * Die Heap-Stuktur wird NICHT automatisch hergestellt
+     */
     public void insert(int key)
     {
         if(heapSize == limit)
@@ -74,6 +90,9 @@ public class Heap
         }
     }
     
+    /**
+     * Entfernt das größte Element aus dem Heap und gibt es zurück. Die Heap-Struktur wird wiederhergestellt
+     */
     public int extractMax()
     {
         if(heapSize < 1){
@@ -89,6 +108,9 @@ public class Heap
         }
     }
     
+    /**
+     * Gibt den Heap aus
+     */
     public void printHeap()
     {
         int levellimit = 1;
