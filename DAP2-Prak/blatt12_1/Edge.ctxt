@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=
+comment0.target=double\ getCost()
+comment0.text=\n\ @return\ Kosten\n
+comment1.params=other
+comment1.target=int\ compareTo(Edge)
+comment1.text=\n\ Vergleicht\ zwei\ Kanten\ anhand\ ihrer\ Gewichte\n\ @param\ other\ die\ zu\ vergleichende\ Kante\n\ @return\ -1,\ 0\ bzw.\ 1\ falls\ diese\ Kante\ ein\ kleineres,\ gleiches\ oder\ groesseres\ Gewicht\ hat\n
+comment2.params=other
+comment2.target=boolean\ equals(java.lang.Object)
+comment2.text=\n\ Vergleicht\ eine\ Kante\ mit\ einem\ Objekt\n\n\ @param\ other\ das\ zu\ vergleichende\ Objekt\n\ @return\ true,\ wenn\ das\ Objekt\ vergleichbar\ und\ gleich\ ist\n
+comment3.params=other
+comment3.target=boolean\ equals(Edge)
+comment3.text=\n\ Vergleicht\ zwei\ Kanten\ anhand\ der\ Knoten\n\n\ @param\ other\ die\ zu\ vergleichende\ Kante\n\ @return\ true,\ wenn\ Start-\ und\ Endknoten\ der\ Kanten\ uebereinstimmen,\ false\ sonst\n
+numComments=4
