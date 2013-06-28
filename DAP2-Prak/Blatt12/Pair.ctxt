@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=g\ h
+comment0.target=Pair(java.lang.Object,\ java.lang.Object)
+comment0.text=\n\ Erstellt\ ein\ neues\ Pair\n\ @param\ g\ erstes\ Datum\ des\ neuen\ Pairs\n\ @param\ h\ zweites\ Datum\ des\ neuen\ Pairs\n
+comment1.params=
+comment1.target=java.lang.Object\ getFst()
+comment1.text=\n\ @return\ das\ erste\ Datum\n
+comment2.params=
+comment2.target=java.lang.Object\ getSnd()
+comment2.text=\n\ @return\ das\ zweite\ Datum\n
+comment3.params=other
+comment3.target=boolean\ equals(java.lang.Object)
+comment4.params=other
+comment4.target=boolean\ equals(Pair)
+comment4.text=\n\ Vergleicht\ zwei\ Pairs\ miteinander.\n\n\ @param\ other\ das\ zu\ vergleichende\ Pair\n\ @return\ true,\ wenn\ beide\ Daten\ der\ Pairs\ uebereinstimmen\n
+numComments=5

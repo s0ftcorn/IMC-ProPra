@@ -8,7 +8,7 @@ public class Heap
     
     public Heap(int n)
     {
-        if(n < 0){
+        if(n <= 0){
             System.out.println("Negative limit");
             return;
         }
