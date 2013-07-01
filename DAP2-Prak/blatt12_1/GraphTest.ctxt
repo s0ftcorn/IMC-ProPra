@@ -1,8 +1,12 @@
 #BlueJ class context
 comment0.params=g\ source
 comment0.target=double[]\ sssp(Graph,\ int)
-comment1.params=args
-comment1.target=void\ main(java.lang.String[])
-comment2.params=
-comment2.target=void\ syntaxteller()
-numComments=3
+comment1.params=g
+comment1.target=double[][]\ apsp(Graph)
+comment2.params=g
+comment2.target=double[][]\ apspBellmandFord(Graph)
+comment3.params=args
+comment3.target=void\ main(java.lang.String[])
+comment4.params=
+comment4.target=void\ syntaxteller()
+numComments=5
