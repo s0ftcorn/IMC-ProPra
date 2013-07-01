@@ -120,7 +120,7 @@ public class GraphTest
     
     public static void main(String[] args) {
         System.out.println();
-        if (args.length > 2) {
+        if (args.length > 2 || args.length == 0) {
             System.out.println("Falsche Anzahl an Parametern");
             syntaxteller();
         } else {
