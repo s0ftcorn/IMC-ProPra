@@ -66,7 +66,7 @@ public class GraphTest
         // in dieser Zeile haben
         return SSSP[numberOfNodes-1];
     }
-    
+     
     private static double[][] apsp(Graph g) {
         // die KnotenListe bekommen, damit wir die Anzahl ausrechnen können
         ArrayList<Node> nodes = g.getNodes();
@@ -74,30 +74,27 @@ public class GraphTest
         
         double[][] apspD = new double[n][n];
         
+        // wir initialisieren die Tabelle mit den Kosten
+        for (int i=0; i<n; i++) {
+            for (int j=0; j<n; j++) {
+                if (i!=j)
+                    apspD[i][j] = g.getCost(i,j);
+            }
+        }
+        
         for (int k=0; k<n; k++) {
-            if (k == 0) {
-                // falls k==0, wir initialisieren die Tabelle (D^0)
-                for (int i=0; i<n; i++) {
-                    for (int j=0; j<n; j++) {
-                        if (i!=j)
-                            apspD[i][j] = g.getCost(i,j);
+            // nach jedem Dürchlauf bekommen wir D^k
+            for (int i=0; i<n; i++) {
+                for (int j=0; j<n; j++) {
+                    // ein bisschen black-magic, damit wir tatsächlich 
+                    // richtige eingaben in die Tabelle einfügen
+                    if (apspD[i][k] > -1 && apspD[k][j] > -1) {
+                        if (apspD[i][j] == -1) 
+                            apspD[i][j] = apspD[i][k] + apspD[k][j];
+                        else
+                            apspD[i][j] = Math.min(apspD[i][j], apspD[i][k] + apspD[k][j]);
                     }
                 }
-            } else {
-                // sonst finden wir immer den kleinsten Wert, und somit bilden D^k
-                for (int i=0; i<n; i++) {
-                    for (int j=0; j<n; j++) {
-                        // ein bisschen black-magic, damit wir tatsächlich 
-                        // richtige eingaben in die Tabelle einfügen
-                        if (apspD[i][k] > -1 && apspD[k][j] > -1) {
-                            if (apspD[i][j] == -1) 
-                                apspD[i][j] = apspD[i][k] + apspD[k][j];
-                            else
-                                apspD[i][j] = Math.min(apspD[i][j], apspD[i][k] + apspD[k][j]);
-                        }
-                    }
-                }
-                
             }
         }
         
