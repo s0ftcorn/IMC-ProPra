@@ -74,8 +74,14 @@ public class GraphTest
         // wir initialisieren die Tabelle mit den Kosten
         for (int i=0; i<n; i++) {
             for (int j=0; j<n; j++) {
-                if (i!=j)
-                    apspD[i][j] = g.getCost(i,j);
+                if (i!=j) {
+                    if (g.getCost(i,j) != -1)
+                        apspD[i][j] = g.getCost(i,j);
+                    else
+                        apspD[i][j] = Double.POSITIVE_INFINITY;
+                } else {
+                    apspD[i][j] = 0;
+                }
             }
         }
         
@@ -85,11 +91,8 @@ public class GraphTest
                 for (int j=0; j<n; j++) {
                     // ein bisschen black-magic, damit wir tatsächlich 
                     // richtige eingaben in die Tabelle einfügen
-                    if (apspD[i][k] > -1 && apspD[k][j] > -1) {
-                        if (apspD[i][j] == -1) 
-                            apspD[i][j] = apspD[i][k] + apspD[k][j];
-                        else
-                            apspD[i][j] = Math.min(apspD[i][j], apspD[i][k] + apspD[k][j]);
+                    if (apspD[i][k] < Double.POSITIVE_INFINITY && apspD[k][j] < Double.POSITIVE_INFINITY) {
+                        apspD[i][j] = Math.min(apspD[i][j], apspD[i][k] + apspD[k][j]);
                     }
                 }
             }
@@ -158,7 +161,7 @@ public class GraphTest
                 }
                 
                 // den längten Weg finden
-                double maxPath = -1;
+                double maxPath = Double.NEGATIVE_INFINITY;
                 int maxNode = 0;
                 for (int i=0; i<allDistance.length; i++) {
                     if (maxPath < allDistance[i] && allDistance[i] < Double.POSITIVE_INFINITY) {
@@ -204,13 +207,10 @@ public class GraphTest
                         System.out.println();
                         System.out.print("Von "+i+"    | ");
                         for (int j=0; j<apspFW.length; j++) {
-                            if (apspFW[i][j] == -1) {
-                                tempS = "notReach";
-                            } else {
-                                tempS = String.valueOf(apspFW[i][j]);
-                                for (int s=tempS.length(); s<8; s++) {
-                                    tempS +=" ";
-                                }
+                            
+                            tempS = String.valueOf(apspFW[i][j]);
+                            for (int s=tempS.length(); s<8; s++) {
+                                tempS +=" ";
                             }
                             tempS += " | ";
                             System.out.print(tempS);
@@ -221,12 +221,12 @@ public class GraphTest
                 }
                 
                 // am weitesten entfernten knoten-paar suchen
-                double maxPath = -1;
+                double maxPath = Double.NEGATIVE_INFINITY;
                 int from = 0;
                 int to = 0;
                 for (int i=0; i<apspFW.length; i++) {
                     for (int j=0; j<apspFW.length; j++) {
-                        if (maxPath < apspFW[i][j]) {
+                        if (maxPath < apspFW[i][j] && apspFW[i][j] < Double.POSITIVE_INFINITY) {
                             from = i;
                             to = j;
                             maxPath = apspFW[i][j];
