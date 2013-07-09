@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=g\ h
+comment0.target=Pair(java.lang.Object,\ java.lang.Object)
+comment0.text=\n\ Erstellt\ ein\ neues\ Pair\n\ @param\ g\ erstes\ Datum\ des\ neuen\ Pairs\n\ @param\ h\ zweites\ Datum\ des\ neuen\ Pairs\n
+comment1.params=
+comment1.target=java.lang.Object\ getFst()
+comment1.text=\n\ @return\ das\ erste\ Datum\n
+comment2.params=
+comment2.target=java.lang.Object\ getSnd()
+comment2.text=\n\ @return\ das\ zweite\ Datum\n
+numComments=3

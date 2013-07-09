@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.params=v\ u\ c
+comment0.target=Edge(Node,\ Node,\ double)
+comment0.text=\n\ Kantenkonstruktor\n\n\ @param\ v\ Startknoten\ der\ Kante\n\ @param\ u\ Endknoten\ der\ Kante\n\ @param\ c\ Kosten\ der\ Kante\n
+comment1.params=
+comment1.target=Node\ getSource()
+comment1.text=\n\ @return\ Startknoten\n
+comment2.params=
+comment2.target=Node\ getDest()
+comment2.text=\n\ @return\ Endknoten\n
+comment3.params=
+comment3.target=double\ getCost()
+comment3.text=\n\ @return\ Kosten\n
+comment4.params=other
+comment4.target=int\ compareTo(Edge)
+comment4.text=\n\ Vergleicht\ zwei\ Kanten\ anhand\ ihrer\ Gewichte\n\ @param\ other\ die\ zu\ vergleichende\ Kante\n\ @return\ -1,\ 0\ bzw.\ 1\ falls\ diese\ Kante\ ein\ kleineres,\ gleiches\ oder\ gr\u00F6\u00DFeres\ Gewicht\ hat\n
+comment5.params=other
+comment5.target=boolean\ equals(java.lang.Object)
+comment5.text=\n\ @Override\n\ Vergleicht\ eine\ Kante\ mit\ einem\ Onjekt\n\n\ @param\ other\ das\ zu\ vergleichende\ Objekt\n\ @return\ true,\ wenn\ das\ Objekt\ vergleichbar\ und\ gleich\ ist\n
+comment6.params=other
+comment6.target=boolean\ equals(Node)
+comment6.text=\n\ Vergleicht\ eine\ Kante\ mit\ einem\ Knoten\n\n\ @param\ other\ der\ zu\ vergleichende\ (End)Knoten\n\ @return\ true,\ wenn\ der\ Endknoten\ der\ \u00FCbergebene\ Knoten\ ist\n
+comment7.params=other
+comment7.target=boolean\ equals(Edge)
+comment7.text=\n\ Vergleicht\ zwei\ Kanten\ anhand\ der\ Knoten\n\n\ @param\ other\ die\ zu\ vergleichende\ Kante\n\ @return\ true,\ wenn\ Start-\ und\ Endknoten\ der\ Kanten\ \u00FCbereinstimmen,\ false\ sonst\n
+numComments=8
