@@ -3,6 +3,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <stdlib.h>
 
 struct id3tag {
 	char title[31];
@@ -42,17 +43,31 @@ static void metadaten_ausgabe(char *dateiname) {
         char buf[128] = {0};
         int offset = 0;
         int i = 0;
+        struct stat fileinfo;
         
         printf("== Datei: %s ==\n\n", dateiname);
+        
+        int retval = stat(dateiname, &fileinfo);
+        if(retval == -1){
+                perror("Fehler bei stat\n");
+                exit(0);
+        }
+        
+        if( !S_ISREG(fileinfo.st_mode) ){
+                printf("Argument ist keine Datei\n");
+                exit(0);
+        }
         
         r_fd = open(dateiname,O_RDONLY);
         if(r_fd == -1){
                 perror("Fehler beim oeffnen der Datei\n");
+                exit(0);
         }
         
-        int retval = lseek(r_fd,-128L,SEEK_END);
+        retval = lseek(r_fd,-128L,SEEK_END);
         if(retval == -1){
                 perror("Fehler beim setzen des Filedeskriptor\n");
+                exit(0);
         }
         
         r_bytes = read(r_fd,buf,128);
@@ -60,10 +75,12 @@ static void metadaten_ausgabe(char *dateiname) {
                 printf("Evtl. ging etwas schief\n");
 	}else if(r_bytes == -1){
                 perror("Fehler beim lesen.\n");
+                exit(0);
 	}
 	
 	if( close(r_fd) == -1 ){
                 perror("Fehler beim schließen der Datei.\n");
+                exit(0);
 	}
 	
 	char temp[3] = {0};
@@ -74,6 +91,7 @@ static void metadaten_ausgabe(char *dateiname) {
         
         if(strcmp("TAG",temp) != 0){
                 printf("Konnte \"TAG\" nicht erkennen.\n");
+                exit(0);
         }
         
         offset = 3;

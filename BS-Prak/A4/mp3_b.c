@@ -3,6 +3,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <stdlib.h>
 
 struct id3tag {
         char title[31];
@@ -14,7 +15,9 @@ struct id3tag {
         unsigned char genre;
 };
 
-
+/*
+ * Funktionsköpfe deklarieren
+ */
 static void metadaten_einabe(char *, char *);
 static void metadaten_ausgabe(char *);
 static void id3tag_ausgabe(struct id3tag *);
@@ -23,9 +26,11 @@ static char* get_genre(unsigned char);
 
 int main(int argc, char **argv) {
         int i;
-        
+        /*
+         * Uebergebene Parameter verarbeiten
+         */
         if(argc <= 1) {
-                printf("Es muss mindestens ein Dateiname angegeben werden\n");
+                printf("Es muss mindestens ein Parameter angegeben werden\n");
                 return 1;
         }else if( strcmp(argv[1],"--modify") == 0){
                for(i = 3; i < argc; i++)
@@ -39,22 +44,43 @@ int main(int argc, char **argv) {
 }
 
 static void metadaten_einabe(char *kommentar, char *dateiname){
+        /*
+         * Variablen deklarieren, in diesem Fall brauchen wir auch Variablen
+         * für ein Auslesen der Datei, da wir erst gucken ob die Datei schon einen id3 v1.1 Bereich
+         * hat
+         */
         int w_fd, r_fd = 0;
         ssize_t w_bytes, r_bytes = 0;
+        /* Wir brauchen einen Buffer in den nur "TAG", mit Nullbyte reinpasst
+         */
         char buf[3] = {0};
         int offset = 0;
         int i = 0;
+        struct stat fileinfo;
         
         printf("== Datei: %s ==\n\n", dateiname);
+        
+        int retval = stat(dateiname, &fileinfo);
+        if(retval == -1){
+                perror("Fehler bei stat\n");
+                exit(0);
+        }
+        
+        if( !S_ISREG(fileinfo.st_mode) ){
+                printf("Argument ist keine Datei\n");
+                exit(0);
+        }
         
         r_fd = open(dateiname,O_RDONLY);
         if(r_fd == -1){
                 perror("Fehler beim oeffnen der Datei\n");
+                exit(0);
         }
         
-        int retval = lseek(r_fd,-128L,SEEK_END);
+        retval = lseek(r_fd,-128L,SEEK_END);
         if(retval == -1){
                 perror("Fehler beim setzen des Filedeskriptor\n");
+                exit(0);
         }
         
         r_bytes = read(r_fd,buf,3);
@@ -62,10 +88,12 @@ static void metadaten_einabe(char *kommentar, char *dateiname){
                 printf("Evtl. ging etwas schief\n");
         }else if(r_bytes == -1){
                 perror("Fehler beim lesen.\n");
+                exit(0);
         }
         
         if( close(r_fd) == -1 ){
                 perror("Fehler beim schließen der Datei.\n");
+                exit(0);
         }
         
         char temp[3] = {0};
@@ -80,22 +108,42 @@ static void metadaten_einabe(char *kommentar, char *dateiname){
                 
                 if(w_fd == -1){
                         perror("Fehler beim öffnen der Datei\n");
+                        exit(0);
                 }
                 
                 int retval = lseek(w_fd,-31L,SEEK_END);
                 if(retval == -1){
                         perror("Fehler beim setzen des Filedeskriptor\n");
+                        exit(0);
                 }
                 
                 w_bytes = write(w_fd, kommentar, 29);
                 
                 if( close(w_fd) == -1 ){
                         perror("Fehler beim schließen der Datei.\n");
+                        exit(0);
                 }
                 
         }else{
-                printf("id3-Bereich nicht gefunden\nHaenge an\n");
                 
+                printf("id3-Bereich nicht gefunden\nHaenge an\n");
+                w_fd = open(dateiname, O_APPEND);
+                
+                if(w_fd == -1){
+                        perror("Fehler beim öffnen der Datei\n");
+                        exit(0);
+                }
+                
+                int retval = lseek(w_fd,0, SEEK_END);
+                if(retval == -1){
+                        perror("Fehler beim setzen des Filedeskriptors\n");
+                        exit(0);
+                }
+                
+                if( close(w_fd) == -1){
+                        perror("Fehler beim schließen der Datei\n");
+                        exit(0);
+                }
         }
 }
 
@@ -106,17 +154,31 @@ static void metadaten_ausgabe(char *dateiname) {
         char buf[128] = {0};
         int offset = 0;
         int i = 0;
+        struct stat fileinfo;
         
         printf("== Datei: %s ==\n\n", dateiname);
+        
+        int retval = stat(dateiname, &fileinfo);
+        if(retval == -1){
+                perror("Fehler bei stat\n");
+                exit(0);
+        }
+        
+        if( !S_ISREG(fileinfo.st_mode) ){
+                printf("Argument ist keine Datei\n");
+                exit(0);
+        }
         
         r_fd = open(dateiname,O_RDONLY);
         if(r_fd == -1){
                 perror("Fehler beim oeffnen der Datei\n");
+                exit(0);
         }
         
-        int retval = lseek(r_fd,-128L,SEEK_END);
+        retval = lseek(r_fd,-128L,SEEK_END);
         if(retval == -1){
                 perror("Fehler beim setzen des Filedeskriptor\n");
+                exit(0);
         }
         
         r_bytes = read(r_fd,buf,128);
@@ -124,10 +186,12 @@ static void metadaten_ausgabe(char *dateiname) {
                 printf("Evtl. ging etwas schief\n");
         }else if(r_bytes == -1){
                 perror("Fehler beim lesen.\n");
+                exit(0);
         }
         
         if( close(r_fd) == -1 ){
                 perror("Fehler beim schließen der Datei.\n");
+                exit(0);
         }
         
         char temp[3] = {0};
@@ -138,6 +202,7 @@ static void metadaten_ausgabe(char *dateiname) {
         
         if(strcmp("TAG",temp) != 0){
                 printf("Konnte \"TAG\" nicht erkennen.\n");
+                exit(0);
         }
         
         offset = 3;
